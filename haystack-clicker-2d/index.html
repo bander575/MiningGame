@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f8ecce">
-<title>إبرة وسط القش | المزرعة الحية</title>
+<title>إبرة وسط القش | أقسام المزرعة -  المزرعة الحية</title>
 <style>
 :root{--ink:#283b37;--muted:#738178;--gold:#efa93d;--darkgold:#cb7a22;--cream:#fff9ec;--outline:#8c6336;--grass:#4d925c;--paper:#fffdf6}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -141,98 +141,159 @@ button:active{transform:translateY(2px) scale(.988)}
 @keyframes factoryBaleSlide{0%{transform:translate(-28px,-3px);opacity:.35}40%{transform:translate(0,0);opacity:1}80%{transform:translate(14px,0);opacity:1}100%{transform:translate(25px,0);opacity:.2}}
 @media(max-width:420px){.factoryYard{padding:8px}.factoryHead h2{font-size:13px}.factoryHead p{font-size:9px}.factoryControlBtn{font-size:10px;padding:8px 7px}.factoryLabels{font-size:8px}.factoryBadge strong{font-size:18px}}
 @media(prefers-reduced-motion:reduce){.factoryYard .factoryBelt,.factoryYard .factoryFeed,.factoryYard .factoryPiston,.factoryYard .factoryBaleRoll{animation:none!important}}
+
+/* الإصدار 9: Separate mobile-first game screens */
+body{background:radial-gradient(circle at 50% 0%,#fff9dc 0,#f8edce 48%,#ecd39e 100%);}
+#app{max-width:900px;padding:12px 12px calc(98px + env(safe-area-inset-bottom));gap:11px}
+.gameScreen{display:none;min-width:0;width:100%;flex:1 0 auto}
+.gameScreen.active{display:flex;flex-direction:column;gap:12px}
+#farmScreen{gap:12px}
+#farmScreen #stage{height:clamp(350px,53svh,630px);flex:none;min-height:350px}
+#farmScreen .stageInfo{margin:0 3px}
+.farmActions{display:block}
+.farmSellBtn{width:100%;height:62px;display:flex;justify-content:center;gap:12px}
+.farmSellBtn .emoji{font-size:24px}
+#crewStrip{background:#fff8e8db}
+#factoryScreen{gap:13px}
+.screenHeader{padding:19px 18px 17px;background:linear-gradient(125deg,#fff7de,#f6dda7);border:2px solid #dcba7c;border-radius:20px}
+.screenEyebrow{font-size:11px;font-weight:900;letter-spacing:.08em;color:#947043;margin-bottom:5px}
+.screenHeader h2{margin:0 0 5px;font-size:clamp(23px,4vw,31px);color:#4e4430}
+.screenHeader p{margin:0;font-size:13px;line-height:1.8;color:#806a4d;font-weight:720}
+.factoryOverview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.overviewItem{min-width:0;background:#fffbef;border:1.5px solid #e2cd9f;border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px}
+.overviewItem span{font-size:11px;color:#876d46;font-weight:900;white-space:nowrap}
+.overviewItem strong{font-size:clamp(19px,3.8vw,28px);line-height:1.2;color:#4c513d;font-variant-numeric:tabular-nums}
+#factoryScreen .factoryYard{margin:0;min-height:310px}
+#factoryScreen .factoryHead h2{font-size:16px}
+#factoryScreen .factoryHead p{font-size:12px}
+.factoryScreenActions{display:grid;grid-template-columns:1.4fr 1fr;gap:9px;margin-top:2px}
+.factorySellAction{height:60px;display:flex;justify-content:center;align-items:center;font-size:14px;min-width:0}
+.factorySellAction span{min-width:0}
+.factorySellAction small{display:block;font-size:11px;margin-top:4px;opacity:.85}
+.factorySecondaryAction{background:#fff6df;border:1.5px solid #dfc188;border-radius:16px;padding:8px;color:#74552f;font-weight:950;box-shadow:0 4px 0 #d5b782}
+.factorySecondaryAction:active{transform:translateY(2px)}
+#shopOverlay,#galleryOverlay{padding:0;margin:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;position:static;z-index:auto;overflow:visible}
+#shopOverlay.active,#galleryOverlay.active{display:flex;flex-direction:column}
+#shopOverlay .panel,#galleryOverlay .panel{width:100%;max-width:none;max-height:none;height:auto;min-height:65svh;overflow:visible;box-shadow:0 5px 0 #d2b98755,0 18px 30px #53411e14;border-radius:19px}
+#shopOverlay .panelHead,#galleryOverlay .panelHead{background:#fff5dd;border-radius:15px 15px 0 0}
+#shopOverlay .shopItems,#galleryOverlay .vaultBody{overflow:visible;max-height:none}
+#shopOverlay .shopItems{grid-template-columns:repeat(2,minmax(0,1fr));padding-bottom:24px}
+#shopOverlay .tabs{position:sticky;top:0;background:#fff9ed;z-index:8;border-bottom:1px solid #eed9b6;padding:9px}
+#galleryOverlay .vaultPanel{background:linear-gradient(160deg,#fff2d8,#f8e9c9)}
+.mainNav{position:fixed;bottom:0;left:0;right:0;z-index:40;display:flex;justify-content:center;gap:4px;padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:linear-gradient(180deg,#fffaf1f5,#fff3d6f8);border-top:2px solid #e4c99a;box-shadow:0 -8px 20px #5c431824;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.mainTab{position:relative;flex:1 1 0;max-width:210px;min-width:0;border:1.5px solid transparent;border-radius:13px;background:transparent;padding:6px 3px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;font-size:11px;font-weight:950;color:#806b4a}
+.navGlyph{font-size:23px;line-height:1.3}
+.mainTab.selected{background:#e0ebd7;border-color:#afc09b;box-shadow:inset 0 1px 0 #ffffff;color:#315941}
+.navCount{position:absolute;right:23%;top:3px;min-width:18px;height:18px;padding:2px 4px;border-radius:14px;background:#df9e42;color:white;font-size:10px;font-weight:950;line-height:14px}
+.navCount:empty{display:none}
+@media(max-width:600px){
+ #app{padding-inline:9px;gap:9px}
+ #farmScreen #stage{height:clamp(335px,52svh,560px);min-height:335px}
+ .screenHeader{padding:15px 13px}
+ #shopOverlay .shopItems{grid-template-columns:1fr}
+ .shopItem{min-height:82px}
+ #shopOverlay .panelHead h2,#galleryOverlay .panelHead h2{font-size:20px}
+ .overviewItem{padding:9px 5px}.overviewItem span{font-size:9.5px}
+ #factoryScreen .factoryYard{min-height:285px}
+ .factoryScreenActions{grid-template-columns:1fr 1fr}
+ .factorySellAction{font-size:12px}
+ .mainNav{padding-top:5px;padding-bottom:calc(6px + env(safe-area-inset-bottom))}
+ .mainTab{font-size:10.5px}
+ .navGlyph{font-size:21px}
+}
+@media(min-width:760px){.mainNav{left:calc(50% - 450px);right:calc(50% - 450px);border-radius:18px 18px 0 0}}
+
 </style>
 </head>
 <body>
 <div id="app">
 <header class="top">
- <div class="brand"><div class="brandMark">🌾</div><div><h1>إبرة وسط القش</h1><p>احفر • اجمع • بع • طوّر • اكتشف</p></div></div>
- <div class="topActions"><button class="topBtn" id="soundBtn" title="تشغيل / إيقاف الصوت">🔊</button><button class="topBtn" id="helpBtn" title="طريقة اللعب">❔</button></div>
+<div class="brand"><div class="brandMark">🌾</div><div><h1>إبرة وسط القش</h1><p>مزرعتك • مصنعك • كنوزك</p></div></div>
+<div class="topActions"><button class="topBtn" id="soundBtn" title="تشغيل / إيقاف الصوت">🔊</button><button class="topBtn" id="helpBtn" title="طريقة اللعب">❔</button></div>
 </header>
 <section class="stats">
- <div class="stat"><div class="statIcon">🪙</div><div class="statContent"><span class="statLabel">العملات</span><span id="coins" class="statNum" dir="ltr">0</span></div></div>
- <div class="stat"><div class="statIcon">🧺</div><div class="statContent"><span class="statLabel">سلة القش</span><span id="bag" class="bagAmount" dir="ltr">0</span><span id="bagLimit" class="bagCapacity">السعة: 24</span><div class="bagTrack"><div id="bagFill" class="bagFill"></div></div></div></div>
- <div class="stat"><div class="statIcon">🪡</div><div class="statContent"><span class="statLabel">إبر الخزنة</span><span id="needles" class="statNum" dir="ltr">0/1K</span></div></div>
+<div class="stat"><div class="statIcon">🪙</div><div class="statContent"><span class="statLabel">العملات</span><span class="statNum" dir="ltr" id="coins">0</span></div></div>
+<div class="stat"><div class="statIcon">🧺</div><div class="statContent"><span class="statLabel">سلة القش</span><span class="bagAmount" dir="ltr" id="bag">0</span><span class="bagCapacity" id="bagLimit">السعة: 24</span><div class="bagTrack"><div class="bagFill" id="bagFill"></div></div></div></div>
+<div class="stat"><div class="statIcon">🪡</div><div class="statContent"><span class="statLabel">إبر الخزنة</span><span class="statNum" dir="ltr" id="needles">0/1K</span></div></div>
 </section>
-<div id="crewStrip"><span id="crewText">🐣 المساعدون: لا يوجد</span><button id="factoryText" type="button" title="اضغط لعرض مصنع البالات">🏭 شاهد المصنع ↙</button><span id="luckText">✨ اكتشف الأسرار في القش</span></div>
-<div class="stageInfo"><span class="stageName" id="stageName">🌻 الحقل الذهبي · كومة 1</span><div class="progressBox"><div class="progress" id="progress"></div></div><span id="percent">0%</span></div>
-<main id="stage">
- <div id="weatherBadge" aria-label="حالة المزرعة">☀️ نهار مشمس</div>
-<canvas id="scene" role="button" tabindex="0" aria-label="انقر على كومة القش لجمع القش"></canvas>
- <div id="eventBanner" role="status"></div><div class="scenePill" id="hint">👆 <em>اضغط على كومة القش</em> واجمع!</div>
- <div class="sceneBottom"><div class="toolPill" id="toolDisplay">✋ الأداة: اليد · +1 قش/نقرة</div><div class="littlePill" id="remaining">باقي 180 قشة</div></div>
- <div id="floatLayer"></div>
-</main>
+<section class="gameScreen active" data-view="farm" id="farmScreen"><div id="crewStrip"><span id="crewText">🐣 المساعدون: لا يوجد</span><button id="factoryText" title="اضغط لعرض مصنع البالات" type="button">🏭 شاهد المصنع ↙</button><span id="luckText">✨ اكتشف الأسرار في القش</span></div><div class="stageInfo"><span class="stageName" id="stageName">🌻 الحقل الذهبي · كومة 1</span><div class="progressBox"><div class="progress" id="progress"></div></div><span id="percent">0%</span></div><main id="stage">
+<div aria-label="حالة المزرعة" id="weatherBadge">☀️ نهار مشمس</div>
+<canvas aria-label="انقر على كومة القش لجمع القش" id="scene" role="button" tabindex="0"></canvas>
+<div id="eventBanner" role="status"></div><div class="scenePill" id="hint">👆 <em>اضغط على كومة القش</em> واجمع!</div>
+<div class="sceneBottom"><div class="toolPill" id="toolDisplay">✋ الأداة: اليد · +1 قش/نقرة</div><div class="littlePill" id="remaining">باقي 180 قشة</div></div>
+<div id="floatLayer"></div>
+</main><div id="bossHUD"><span>👑 حارس القش</span><div id="bossBar"><div id="bossFill"></div></div><span dir="ltr" id="bossHp">0 / 0</span></div><section class="farmActions">
+<button class="action farmSellBtn" id="sellBtn"><span class="emoji">💰</span><span>بيع القش <span class="desc" id="sellText">السلة فارغة</span></span></button>
 
-<section class="factoryYard" id="factoryYard" aria-label="مصنع القش والمكبس والسير الناقل">
- <div class="factoryHead">
-  <div><h2>مصنع بالات القش <span class="factoryLive" id="factoryMode">جاهز للعمل</span></h2><p>القش من السلة ← السير الناقل ← المكبس ← بالات مربّعة</p></div>
-  <div class="factoryBadge"><strong id="factoryBalesCount" dir="ltr">0</strong><small>بالة جاهزة</small></div>
- </div>
- <div class="factoryIllustration">
-  <svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="مصنع قش مرسوم مع سير ناقل ومكبس هيدروليكي وبالات مربعة">
-   <defs>
-    <linearGradient id="factorySky" x2="0" y2="1"><stop stop-color="#e5f6ea"/><stop offset="1" stop-color="#a8d4ad"/></linearGradient>
-    <linearGradient id="factoryMetal" x2="1" y2="1"><stop stop-color="#e3e9ea"/><stop offset=".5" stop-color="#93abb1"/><stop offset="1" stop-color="#657c87"/></linearGradient>
-    <linearGradient id="factoryHay" x2="1" y2="1"><stop stop-color="#ffe89b"/><stop offset=".55" stop-color="#e5ae4b"/><stop offset="1" stop-color="#bd7c2e"/></linearGradient>
-    <linearGradient id="factoryWall" x2="0" y2="1"><stop stop-color="#bddebd"/><stop offset="1" stop-color="#6ea76c"/></linearGradient>
-   </defs>
-   <rect width="760" height="180" rx="14" fill="url(#factorySky)"/>
-   <path d="M0 139Q135 124 230 144Q355 128 471 141Q605 125 760 143V180H0Z" fill="#78a966"/>
-   <path d="M0 164Q160 153 302 169T760 163V180H0Z" fill="#6c9559"/>
-   <g opacity=".6" fill="#9cba82"><path d="M0 86L125 58L210 85Z"/><path d="M480 87L570 60L660 86Z"/></g>
-   <!-- Hay input: hand-illustrated loose pile -->
-   <g transform="translate(68 116)"><ellipse cy="23" rx="55" ry="12" fill="#5e7c46" opacity=".25"/><path d="M-55 22Q-54 3-31-10Q-21-34 3-34Q36-37 45-4Q61 7 55 22Z" fill="url(#factoryHay)" stroke="#ad7633" stroke-width="3"/>
-    <g stroke="#ffe7a0" stroke-width="3" stroke-linecap="round"><path d="M-42 5l14-8M-28 12l18-7M-9-7l18-7M18 9l17-9M-7 18l18-5M17-15l11 8"/></g></g>
-   <!-- The intake hopper chute -->
-   <path d="M108 98 L162 98 L177 130 L137 130Z" fill="#a36a3a" stroke="#784e33" stroke-width="5"/>
-   <path d="M111 101H162L155 112H120Z" fill="#da9e58"/>
-   <!-- Moving conveyor belt, rollers and hay feed -->
-   <path d="M158 140H398L411 154H151Z" fill="#354d53"/>
-   <rect x="149" y="123" width="270" height="21" rx="9" fill="#46636b" stroke="#28454b" stroke-width="4"/>
-   <g class="factoryBelt" stroke="#d0b16a" stroke-width="7"><path d="M170 126v16M213 126v16M256 126v16M299 126v16M342 126v16M385 126v16"/></g>
-   <g fill="#d4e1df" stroke="#556d70" stroke-width="4"><circle cx="165" cy="136" r="9"/><circle cx="404" cy="136" r="9"/></g>
-   <g fill="#77634d" stroke="#4b3b2d" stroke-width="3"><path d="M170 152l-8 20h14l12-20Z"/><path d="M386 152l14 20h12l-6-20Z"/></g>
-   <g class="factoryFeed" fill="#efc771" stroke="#ac7d31" stroke-width="2"><path d="M210 118l10-9 13 7 3 9h-25Z"/><path d="M291 118l15-11 12 9 5 9h-29Z"/></g>
-   <!-- Press housing, steel uprights, hydraulic cylinder -->
-   <g><rect x="407" y="56" width="105" height="102" rx="11" fill="url(#factoryMetal)" stroke="#49626a" stroke-width="7"/>
-    <rect x="419" y="74" width="80" height="72" rx="5" fill="#536a63" stroke="#364f50" stroke-width="5"/>
-    <rect x="419" y="74" width="80" height="72" rx="5" fill="#263f3e"/>
-    <rect x="413" y="40" width="92" height="33" rx="9" fill="#cf8447" stroke="#754f31" stroke-width="5"/>
-    <rect x="448" y="21" width="24" height="35" rx="6" fill="#a9bbc0" stroke="#52646a" stroke-width="5"/>
-    <g class="factoryPiston"><rect x="436" y="76" width="49" height="17" rx="5" fill="url(#factoryMetal)" stroke="#4d6165" stroke-width="4"/><rect x="458" y="61" width="7" height="23" rx="2" fill="#f0f3ed"/></g>
-    <path d="M418 136h92" stroke="#edaa54" stroke-width="9"/>
-    <circle cx="495" cy="54" r="8" fill="#e5db8c" stroke="#694d33" stroke-width="3"/></g>
-   <!-- Bale travel chute and output platform -->
-   <path d="M511 130l58 1 8 17h-73Z" fill="#788489" stroke="#405b63" stroke-width="4"/>
-   <rect x="568" y="148" width="152" height="16" rx="5" fill="#b17b46" stroke="#7b5432" stroke-width="4"/>
-   <g class="factoryBaleRoll"><g transform="translate(586 120)"><rect x="0" y="0" width="49" height="31" rx="5" fill="url(#factoryHay)" stroke="#925f2f" stroke-width="4"/><path d="M13 1v29M35 1v29" stroke="#fff0a9" stroke-width="5"/><path d="M2 11l44-3M2 22l43-4" stroke="#c98b3d" stroke-width="2"/></g></g>
-   <!-- Actual stored bales slots, enabled when stock exists -->
-   <g id="factoryStockArt"><rect x="646" y="110" width="53" height="37" rx="5" fill="url(#factoryHay)" stroke="#905d2c" stroke-width="4"/><path d="M660 112v33M686 112v33" stroke="#ffedb4" stroke-width="5"/><path d="M647 125h52" stroke="#be8c45" stroke-width="3"/></g>
-   <!-- hand-drawn plant and sun accents -->
-   <path d="M25 164q5-14 2-23M35 166q-4-13-11-21M739 165q-6-14 1-26" fill="none" stroke="#398a57" stroke-width="4" stroke-linecap="round"/>
-  </svg>
-  <div class="factoryLabels"><span>🌾 قش خام</span><span>↗ سير متحرك</span><span>⚙️ مكبس</span><span>📦 بالات</span></div>
- </div>
- <div class="factoryControls">
-  <div class="factoryStorage"><span>امتلاء المكبس: <b id="factoryStoredValue" dir="ltr">0 / 72</b></span><div class="factoryStorageTrack"><div id="factoryStoredFill"></div></div></div>
-  <button type="button" class="factoryControlBtn" id="factoryPauseBtn">⏸ إيقاف</button>
-  <button type="button" class="factoryControlBtn primary" id="factoryUpgradeBtn">⚙️ تطوير المصنع</button>
- </div>
-</section>
-<div id="bossHUD"><span>👑 حارس القش</span><div id="bossBar"><div id="bossFill"></div></div><span id="bossHp" dir="ltr">0 / 0</span></div>
-<section class="actionBar">
- <button class="action" id="sellBtn"><span class="emoji">💰</span><span>بيع القش <span id="sellText" class="desc">السلة فارغة</span></span></button>
- <button class="action secondary" id="shopBtn"><span class="emoji">🛒</span><span>المتجر<span class="desc">أدوات وتطويرات</span></span></button>
- <button class="action blue" id="galleryBtn"><span class="emoji">🗝️</span><span>خزنة الإبر<span class="desc">1,000 إبرة مختلفة</span></span></button>
-</section>
-<div class="footer">مزرعة حية 🌾 • مصنع بالات متحرك • 1,000 إبرة • حفظ تلقائي</div>
+
+</section></section><section class="gameScreen" data-view="factory" id="factoryScreen"><div class="screenHeader"><div class="screenEyebrow">الإنتاج والتصنيع</div><h2>🏭 مصنع بالات القش</h2><p>القش اللي تجمعه يدخل السير الناقل، وينضغط قدامك إلى بالات مربعة قابلة للبيع.</p></div><div class="factoryOverview"><div class="overviewItem"><span>قش في السلة</span><strong dir="ltr" id="factoryLooseStat">0</strong></div><div class="overviewItem"><span>بالات جاهزة</span><strong dir="ltr" id="factoryReadyStat">0</strong></div><div class="overviewItem"><span>سحب المصنع/ث</span><strong dir="ltr" id="factoryRateStat">10</strong></div></div><section aria-label="مصنع القش والمكبس والسير الناقل" class="factoryYard" id="factoryYard">
+<div class="factoryHead">
+<div><h2>مصنع بالات القش <span class="factoryLive" id="factoryMode">جاهز للعمل</span></h2><p>القش من السلة ← السير الناقل ← المكبس ← بالات مربّعة</p></div>
+<div class="factoryBadge"><strong dir="ltr" id="factoryBalesCount">0</strong><small>بالة جاهزة</small></div>
 </div>
+<div class="factoryIllustration">
+<svg aria-label="مصنع قش مرسوم مع سير ناقل ومكبس هيدروليكي وبالات مربعة" role="img" viewbox="0 0 760 180" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="factorySky" x2="0" y2="1"><stop stop-color="#e5f6ea"></stop><stop offset="1" stop-color="#a8d4ad"></stop></lineargradient>
+<lineargradient id="factoryMetal" x2="1" y2="1"><stop stop-color="#e3e9ea"></stop><stop offset=".5" stop-color="#93abb1"></stop><stop offset="1" stop-color="#657c87"></stop></lineargradient>
+<lineargradient id="factoryHay" x2="1" y2="1"><stop stop-color="#ffe89b"></stop><stop offset=".55" stop-color="#e5ae4b"></stop><stop offset="1" stop-color="#bd7c2e"></stop></lineargradient>
+<lineargradient id="factoryWall" x2="0" y2="1"><stop stop-color="#bddebd"></stop><stop offset="1" stop-color="#6ea76c"></stop></lineargradient>
+</defs>
+<rect fill="url(#factorySky)" height="180" rx="14" width="760"></rect>
+<path d="M0 139Q135 124 230 144Q355 128 471 141Q605 125 760 143V180H0Z" fill="#78a966"></path>
+<path d="M0 164Q160 153 302 169T760 163V180H0Z" fill="#6c9559"></path>
+<g fill="#9cba82" opacity=".6"><path d="M0 86L125 58L210 85Z"></path><path d="M480 87L570 60L660 86Z"></path></g>
+<!-- Hay input: hand-illustrated loose pile -->
+<g transform="translate(68 116)"><ellipse cy="23" fill="#5e7c46" opacity=".25" rx="55" ry="12"></ellipse><path d="M-55 22Q-54 3-31-10Q-21-34 3-34Q36-37 45-4Q61 7 55 22Z" fill="url(#factoryHay)" stroke="#ad7633" stroke-width="3"></path>
+<g stroke="#ffe7a0" stroke-linecap="round" stroke-width="3"><path d="M-42 5l14-8M-28 12l18-7M-9-7l18-7M18 9l17-9M-7 18l18-5M17-15l11 8"></path></g></g>
+<!-- The intake hopper chute -->
+<path d="M108 98 L162 98 L177 130 L137 130Z" fill="#a36a3a" stroke="#784e33" stroke-width="5"></path>
+<path d="M111 101H162L155 112H120Z" fill="#da9e58"></path>
+<!-- Moving conveyor belt, rollers and hay feed -->
+<path d="M158 140H398L411 154H151Z" fill="#354d53"></path>
+<rect fill="#46636b" height="21" rx="9" stroke="#28454b" stroke-width="4" width="270" x="149" y="123"></rect>
+<g class="factoryBelt" stroke="#d0b16a" stroke-width="7"><path d="M170 126v16M213 126v16M256 126v16M299 126v16M342 126v16M385 126v16"></path></g>
+<g fill="#d4e1df" stroke="#556d70" stroke-width="4"><circle cx="165" cy="136" r="9"></circle><circle cx="404" cy="136" r="9"></circle></g>
+<g fill="#77634d" stroke="#4b3b2d" stroke-width="3"><path d="M170 152l-8 20h14l12-20Z"></path><path d="M386 152l14 20h12l-6-20Z"></path></g>
+<g class="factoryFeed" fill="#efc771" stroke="#ac7d31" stroke-width="2"><path d="M210 118l10-9 13 7 3 9h-25Z"></path><path d="M291 118l15-11 12 9 5 9h-29Z"></path></g>
+<!-- Press housing, steel uprights, hydraulic cylinder -->
+<g><rect fill="url(#factoryMetal)" height="102" rx="11" stroke="#49626a" stroke-width="7" width="105" x="407" y="56"></rect>
+<rect fill="#536a63" height="72" rx="5" stroke="#364f50" stroke-width="5" width="80" x="419" y="74"></rect>
+<rect fill="#263f3e" height="72" rx="5" width="80" x="419" y="74"></rect>
+<rect fill="#cf8447" height="33" rx="9" stroke="#754f31" stroke-width="5" width="92" x="413" y="40"></rect>
+<rect fill="#a9bbc0" height="35" rx="6" stroke="#52646a" stroke-width="5" width="24" x="448" y="21"></rect>
+<g class="factoryPiston"><rect fill="url(#factoryMetal)" height="17" rx="5" stroke="#4d6165" stroke-width="4" width="49" x="436" y="76"></rect><rect fill="#f0f3ed" height="23" rx="2" width="7" x="458" y="61"></rect></g>
+<path d="M418 136h92" stroke="#edaa54" stroke-width="9"></path>
+<circle cx="495" cy="54" fill="#e5db8c" r="8" stroke="#694d33" stroke-width="3"></circle></g>
+<!-- Bale travel chute and output platform -->
+<path d="M511 130l58 1 8 17h-73Z" fill="#788489" stroke="#405b63" stroke-width="4"></path>
+<rect fill="#b17b46" height="16" rx="5" stroke="#7b5432" stroke-width="4" width="152" x="568" y="148"></rect>
+<g class="factoryBaleRoll"><g transform="translate(586 120)"><rect fill="url(#factoryHay)" height="31" rx="5" stroke="#925f2f" stroke-width="4" width="49" x="0" y="0"></rect><path d="M13 1v29M35 1v29" stroke="#fff0a9" stroke-width="5"></path><path d="M2 11l44-3M2 22l43-4" stroke="#c98b3d" stroke-width="2"></path></g></g>
+<!-- Actual stored bales slots, enabled when stock exists -->
+<g id="factoryStockArt"><rect fill="url(#factoryHay)" height="37" rx="5" stroke="#905d2c" stroke-width="4" width="53" x="646" y="110"></rect><path d="M660 112v33M686 112v33" stroke="#ffedb4" stroke-width="5"></path><path d="M647 125h52" stroke="#be8c45" stroke-width="3"></path></g>
+<!-- hand-drawn plant and sun accents -->
+<path d="M25 164q5-14 2-23M35 166q-4-13-11-21M739 165q-6-14 1-26" fill="none" stroke="#398a57" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="factoryLabels"><span>🌾 قش خام</span><span>↗ سير متحرك</span><span>⚙️ مكبس</span><span>📦 بالات</span></div>
+</div>
+<div class="factoryControls">
+<div class="factoryStorage"><span>امتلاء المكبس: <b dir="ltr" id="factoryStoredValue">0 / 72</b></span><div class="factoryStorageTrack"><div id="factoryStoredFill"></div></div></div>
+<button class="factoryControlBtn" id="factoryPauseBtn" type="button">⏸ إيقاف</button>
+<button class="factoryControlBtn primary" id="factoryUpgradeBtn" type="button">⚙️ تطوير المصنع</button>
+</div>
+</section><div class="factoryScreenActions"><button class="action factorySellAction" id="factorySellBtn" type="button">💰 <span>بيع القش والبالات <small id="factorySellInfo">0 عملة</small></span></button><button class="factorySecondaryAction" id="factoryBackToFarm" type="button">🌾 ارجع للمزرعة</button></div></section><div aria-hidden="true" class="gameScreen" data-view="shop" id="shopOverlay"><section class="panel"><div class="panelHead"><div><h2>🛒 متجر المزرعة</h2><p>أدوات، آلات، حيوانات ومساعدون حقيقيون</p></div><button aria-label="إغلاق" class="close" data-go="farm" title="العودة للمزرعة">×</button></div><div class="tabs" id="shopTabs"><button class="tab selected" data-tab="tools">🧤 الأدوات</button><button class="tab" data-tab="upgrades">⚡ التطويرات</button><button class="tab" data-tab="helpers">🐣 المساعدون</button><button class="tab" data-tab="factory">🏭 المصنع</button></div><div class="shopItems" id="shopItems"></div></section></div><div aria-hidden="true" class="gameScreen" data-view="vault" id="galleryOverlay"><section class="panel vaultPanel"><div class="panelHead"><div><h2>🗝️ خزنة الإبر</h2><p>خزنة حقيقية فيها 1,000 موضع لإبر فريدة</p></div><button aria-label="إغلاق" class="close" data-go="farm" title="العودة للمزرعة">×</button></div><div class="vaultBody" id="galleryBody"></div></section></div>
+
+
+
+
+
+<div class="footer">مزرعة القش 🌾 • اللعب والمصنع والمتجر والخزنة في أقسام منفصلة • حفظ تلقائي</div>
+<nav aria-label="التنقل بين أقسام اللعبة" class="mainNav"><button aria-current="page" class="mainTab selected" data-view-tab="farm"><span class="navGlyph">🌾</span><span>المزرعة</span></button><button class="mainTab" data-view-tab="factory"><span class="navGlyph">🏭</span><span>المصنع</span><span class="navCount" id="navFactoryCount">0</span></button><button class="mainTab" data-view-tab="shop"><span class="navGlyph">🛒</span><span>المتجر</span></button><button class="mainTab" data-view-tab="vault"><span class="navGlyph">🗝️</span><span>الخزنة</span></button></nav></div>
 <div id="toast" role="status"></div>
-<div class="overlay" id="shopOverlay" aria-hidden="true"><section class="panel"><div class="panelHead"><div><h2>🛒 متجر المزرعة</h2><p>أدوات، آلات، حيوانات ومساعدون حقيقيون</p></div><button class="close" data-close="shopOverlay" aria-label="إغلاق">×</button></div><div class="tabs" id="shopTabs"><button class="tab selected" data-tab="tools">🧤 الأدوات</button><button class="tab" data-tab="upgrades">⚡ التطويرات</button><button class="tab" data-tab="helpers">🐣 المساعدون</button><button class="tab" data-tab="factory">🏭 المصنع</button></div><div class="shopItems" id="shopItems"></div></section></div>
-<div class="overlay" id="helpOverlay" aria-hidden="true"><section class="panel"><div class="panelHead"><h2>🌾 كيف تلعب؟</h2><button class="close" data-close="helpOverlay" aria-label="إغلاق">×</button></div><div class="helpBody"><div class="helpGrid"><div class="helpTip">👆 <b>انقر على الكومة</b> لجمع القش وراقب الكنوز تظهر. اضغط على الصندوق قبل اختفائه!</div><div class="helpTip">🧺 <b>إذا امتلأت السلة</b> اضغط «بيع القش» للحصول على عملات.</div><div class="helpTip">🏭 <b>مصنع البالات</b> يسحب القش من السلة ويحوّله إلى بالات مربعة تتحرك وتُباع بسعر أعلى.</div><div class="helpTip">🌤️ <b>المزرعة تتبدل بين نهار وليل</b> مع رياح خفيفة، وزعيم 👹 كل 5 أكوام. اكشف الإبرة ثم المسها!</div></div><button class="bigBtn" data-close="helpOverlay">فهمت، خلني ألعب! 🎮</button></div></section></div>
-<div class="overlay" id="galleryOverlay" aria-hidden="true"><section class="panel vaultPanel"><div class="panelHead"><div><h2>🗝️ خزنة الإبر</h2><p>خزنة حقيقية فيها 1,000 موضع لإبر فريدة</p></div><button class="close" data-close="galleryOverlay" aria-label="إغلاق">×</button></div><div class="vaultBody" id="galleryBody"></div></section></div><div class="overlay" id="needleOverlay" aria-hidden="true"><section class="panel needlePanel"><div class="panelHead"><h2 id="needleDetailTitle">🪡 إبرة نادرة</h2><button class="close" data-close="needleOverlay" aria-label="إغلاق">×</button></div><div id="needleDetailBody" class="needleDetail"></div></section></div>
-<div class="overlay" id="winOverlay" aria-hidden="true"><section class="panel"><div class="victory"><div class="trophy" id="winIcon">🪡✨</div><h2 id="winTitle">لقيت الإبرة!</h2><p id="winMessage">مبروك! لقيت الإبرة بين القش.</p><div class="victoryReward" id="winReward">+150 🪙</div><button class="bigBtn vaultWinBtn" id="winVaultBtn">🗝️ ضع الإبرة في الخزنة</button><button class="bigBtn" id="nextBtn">🌾 افتح كومة جديدة</button></div></section></div>
+
+<div aria-hidden="true" class="overlay" id="helpOverlay"><section class="panel"><div class="panelHead"><h2>🌾 كيف تلعب؟</h2><button aria-label="إغلاق" class="close" data-close="helpOverlay">×</button></div><div class="helpBody"><div class="helpGrid"><div class="helpTip">👆 <b>انقر على الكومة</b> لجمع القش وراقب الكنوز تظهر. اضغط على الصندوق قبل اختفائه!</div><div class="helpTip">🧺 <b>إذا امتلأت السلة</b> اضغط «بيع القش» للحصول على عملات.</div><div class="helpTip">🏭 <b>مصنع البالات</b> يسحب القش من السلة ويحوّله إلى بالات مربعة تتحرك وتُباع بسعر أعلى.</div><div class="helpTip">🌤️ <b>المزرعة تتبدل بين نهار وليل</b> مع رياح خفيفة، وزعيم 👹 كل 5 أكوام. اكشف الإبرة ثم المسها!</div></div><button class="bigBtn" data-close="helpOverlay">فهمت، خلني ألعب! 🎮</button></div></section></div>
+<div aria-hidden="true" class="overlay" id="needleOverlay"><section class="panel needlePanel"><div class="panelHead"><h2 id="needleDetailTitle">🪡 إبرة نادرة</h2><button aria-label="إغلاق" class="close" data-close="needleOverlay">×</button></div><div class="needleDetail" id="needleDetailBody"></div></section></div>
+<div aria-hidden="true" class="overlay" id="winOverlay"><section class="panel"><div class="victory"><div class="trophy" id="winIcon">🪡✨</div><h2 id="winTitle">لقيت الإبرة!</h2><p id="winMessage">مبروك! لقيت الإبرة بين القش.</p><div class="victoryReward" id="winReward">+150 🪙</div><button class="bigBtn vaultWinBtn" id="winVaultBtn">🗝️ ضع الإبرة في الخزنة</button><button class="bigBtn" id="nextBtn">🌾 افتح كومة جديدة</button></div></section></div>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
@@ -374,8 +435,34 @@ function updateFactoryPanel(){
 }
 function processFactory(){if(state.factoryPaused)return 0;const moved=Math.min(state.bag,factoryIntake());if(moved>0){state.bag-=moved;state.factoryStored+=moved;factoryFeedFx=Math.min(1,factoryFeedFx+.34);}let made=0,need=baleSize();while(state.factoryStored>=need){state.factoryStored-=need;state.bales++;state.totalBales++;made++;factoryPressFx=Math.min(1,factoryPressFx+.85);for(let i=0;i<8;i++)particles.push(makeParticle(width*.84,height*.73,'straw'));}if(made>0&&Date.now()-lastFactoryToast>2600){toast('📦 صنع المصنع '+fmt(made)+' بالة قش مربعة!');lastFactoryToast=Date.now();beep(760,.1,'triangle',.03);}if(moved>0||made>0)save();return made;}
 function updateHUD(){const t=tools.find(t=>t.id===state.equipped);const l=currentLocation();const preview=sellPreview();$('coins').textContent=compact(state.coins);$('coins').title=fmt(state.coins)+' عملة';$('bag').textContent=compact(state.bag);$('bagLimit').textContent='السعة: '+compact(cap());$('bag').title=fmt(state.bag)+' قشة من '+fmt(cap());$('bagLimit').title='الحد الأقصى: '+fmt(cap());$('bagFill').style.width=Math.min(100,100*state.bag/Math.max(1,cap()))+'%';$('needles').textContent=compact(state.vaultOwned.length)+' / 1K';$('needles').title=fmt(state.vaultOwned.length)+' من أصل 1000 إبرة فريدة';$('stageName').textContent='🌾 '+l.name+' · كومة '+compact(state.level)+(isBoss()?' 👹':'');const pct=Math.round(100*safeProgress());const battlePct=state.bossHP>0?Math.round(100*(1-state.bossHP/Math.max(1,state.bossMax))):null;$('progress').style.width=(battlePct??pct)+'%';$('percent').textContent=(battlePct===null?pct:battlePct)+'%';$('remaining').textContent=state.bossHP>0?'حارس القش!':state.remaining>0?'باقي '+compact(state.remaining)+' قشة':'ظهرت الإبرة!';$('toolDisplay').textContent=t.emoji+' '+t.name+' · +'+compact(power())+' قش/نقرة';$('sellText').textContent=preview.total>0?'تحصل '+compact(preview.total)+' 🪙'+(state.bales>0?' • '+compact(state.bales)+' بالة':''):'لا شيء للبيع';$('sellBtn').disabled=preview.total<=0;$('soundBtn').textContent=state.sound?'🔊':'🔇';$('hint').innerHTML=state.bossHP>0?'👑 <em>حارس القش!</em> اضرب القلب المتوهّج':state.remaining<=0?'✨ <em>ظهرت الإبرة!</em> المسها الآن':state.bag>=cap()?'🧺 <em>السلة ممتلئة!</em> المصنع أو البيع ينقذك':'👆 <em>انقر على كومة القش</em> واكتشف أسرارها!';
-const crew=helpers.filter(h=>state.helperOwned[h.id]>0).map(h=>h.name+' ×'+state.helperOwned[h.id]);$('crewText').textContent=crew.length?'🐣 المساعدون: '+crew.join(' • '):'🐣 المساعدون: لا يوجد';$('factoryText').textContent='🏭 '+compact(state.bales)+' بالة • شاهد المصنع ↙';$('factoryText').title='المصنع يحوّل القش إلى بالات مربعة. المخزون الداخلي: '+fmt(Math.floor(state.factoryStored))+' من '+fmt(baleSize())+' قش.';$('luckText').textContent=activeEvent()?('✨ حدث نشط: '+(activeEvent().id==='frenzy'?'حُمّى القش':activeEvent().id==='double'?'البيع الذهبي':'موجة المغناطيس')):'✨ حظك '+(state.luckLevel>0?'+'+state.luckLevel:'عادي')+' • إجمالي البالات '+compact(state.totalBales);
+const crew=helpers.filter(h=>state.helperOwned[h.id]>0).map(h=>h.name+' ×'+state.helperOwned[h.id]);$('crewText').textContent=crew.length?'🐣 المساعدون: '+crew.join(' • '):'🐣 المساعدون: لا يوجد';$('navFactoryCount').textContent=state.bales>0?compact(state.bales):'';$('factoryLooseStat').textContent=compact(state.bag);$('factoryReadyStat').textContent=compact(state.bales);$('factoryRateStat').textContent=compact(factoryIntake());$('factorySellInfo').textContent=compact(sellPreview().total)+' عملة';$('factorySellBtn').disabled=sellPreview().total<=0;$('factoryText').textContent='🏭 '+compact(state.bales)+' بالة • شاهد المصنع ↙';$('factoryText').title='المصنع يحوّل القش إلى بالات مربعة. المخزون الداخلي: '+fmt(Math.floor(state.factoryStored))+' من '+fmt(baleSize())+' قش.';$('luckText').textContent=activeEvent()?('✨ حدث نشط: '+(activeEvent().id==='frenzy'?'حُمّى القش':activeEvent().id==='double'?'البيع الذهبي':'موجة المغناطيس')):'✨ حظك '+(state.luckLevel>0?'+'+state.luckLevel:'عادي')+' • إجمالي البالات '+compact(state.totalBales);
 $('bossHUD').classList.toggle('on',state.bossHP>0);$('bossFill').style.width=(state.bossMax?100*state.bossHP/state.bossMax:0)+'%';$('bossHp').textContent=compact(Math.ceil(state.bossHP))+' / '+compact(state.bossMax);$('bossHp').title=fmt(state.bossHP)+' / '+fmt(state.bossMax);if(activeEvent()){$('eventBanner').textContent=(state.event.id==='frenzy'?'🔥 حُمّى القش ×5':state.event.id==='double'?'💰 بيع مضاعف':'🧲 قوة مضاعفة')+' · '+Math.ceil((state.event.until-Date.now())/1000)+' ث';$('eventBanner').classList.add('on');}else{$('eventBanner').classList.remove('on');}updateFactoryPanel();} 
+
+let currentScreen='farm';
+function navigate(view){
+ const screens={farm:'farmScreen',factory:'factoryScreen',shop:'shopOverlay',vault:'galleryOverlay'};
+ if(!screens[view])return;
+ const prev=currentScreen;
+ currentScreen=view;
+ for(const [key,id] of Object.entries(screens)){
+   const el=$(id);const selected=key===view;
+   el.classList.toggle('active',selected);
+   el.setAttribute('aria-hidden',selected?'false':'true');
+ }
+ for(const btn of document.querySelectorAll('[data-view-tab]')){
+   const selected=btn.dataset.viewTab===view;
+   btn.classList.toggle('selected',selected);
+   if(selected)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current');
+ }
+ if(view==='shop'){for(const btn of $('shopTabs').querySelectorAll('[data-tab]'))btn.classList.toggle('selected',btn.dataset.tab===shopTab);renderShop();}
+ if(view==='vault'&&prev!=='vault')renderVault();
+ if(view==='factory')updateFactoryPanel();
+ if(view==='farm'){
+   requestAnimationFrame(()=>fit());
+   if(vaultFromWin&&roundWin){vaultFromWin=false;show('winOverlay');}
+ }
+ window.scrollTo(0,0);
+}
 function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(noticeTimeout);noticeTimeout=setTimeout(()=>el.classList.remove('show'),1550);}
 function show(id){$(id).classList.add('show');$(id).setAttribute('aria-hidden','false');}
 function hide(id){$(id).classList.remove('show');$(id).setAttribute('aria-hidden','true');if(id==='galleryOverlay'&&vaultFromWin){vaultFromWin=false;show('winOverlay');}}
@@ -410,7 +497,7 @@ items.push({id:'info',kind:'factoryInfo',icon:'🏭',title:'مصنع البال�
 else for(const h of helpers){const lvl=state.helperOwned[h.id];items.push({id:h.id,kind:'helper',icon:helperCardArt(h.icon),title:h.name+' · مستوى '+lvl,sub:h.desc+' المجموع '+fmt(h.rate*lvl)+'/ث',price:Math.round(h.price*Math.pow(2.55,lvl)),maxed:lvl>=h.max});}
 for(const x of items){const card=document.createElement('div');card.className='shopItem';const icon=document.createElement('div');icon.className='shopIcon';if(x.kind==='helper')icon.innerHTML=x.icon;else icon.textContent=x.icon;const main=document.createElement('div');main.className='itemMain';const h=document.createElement('h3');h.textContent=x.title;const p=document.createElement('p');p.textContent=x.sub;const btn=document.createElement('button');btn.className='buy';btn.textContent=x.active?'✓ مجهزة':x.maxed?'✅ مكتمل':x.owned?'استخدم':fmt(x.price)+' 🪙';if(x.kind==='factoryInfo'){btn.textContent='يعمل الآن';btn.classList.add('owned');btn.disabled=true;}else if(x.active||x.maxed){btn.classList.add('owned');btn.disabled=true;}else if(x.owned)btn.classList.add('owned');else if(state.coins<x.price)btn.disabled=true;
 if(x.kind!=='factoryInfo')btn.addEventListener('click',()=>purchase(x.kind,x.id));main.append(h,p,btn);card.append(icon,main);el.append(card);}}
-function showShop(){shopTab='tools';for(const t of document.querySelectorAll('.tab'))t.classList.toggle('selected',t.dataset.tab==='tools');renderShop();show('shopOverlay');}
+function showShop(tab='tools'){shopTab=tab;navigate('shop');}
 function sell(){const preview=sellPreview();if(preview.total<=0){toast('لا يوجد قش أو بالات للبيع الآن');return;}state.coins+=preview.total;const soldBales=state.bales;state.bag=0;state.bales=0;beep(640,.14,'triangle');setTimeout(()=>beep(920,.12,'triangle'),95);toast('بعت '+(soldBales?fmt(soldBales)+' بالة و ':'')+'ربحت '+fmt(preview.total)+' 🪙');save();updateHUD();}
 function collect(n,px,py,automatic=false){if(roundWin||state.remaining<=0||state.bossHP>0)return 0;
 let gained=Math.min(Math.max(0,n),state.remaining,Math.max(0,cap()-state.bag));if(gained===0){if(!automatic)toast('🧺 السلة ممتلئة! بِع القش أولاً');return 0;}state.bag+=gained;state.remaining-=gained;state.totalHay+=gained;wobble=.8;
@@ -421,7 +508,7 @@ else milestones();save();updateHUD();return gained;}
 function hitBoss(x,y){if(state.bossHP<=0)return;const damage=Math.max(4,Math.ceil(power()*2));bossHitUntil=performance.now()+210;state.bossHP=Math.max(0,state.bossHP-damage);for(let i=0;i<18;i++)particles.push(makeParticle(x,y,'straw'));floatText(x,y,'⚔️ '+fmt(damage),true);wobble=1.7;beep(220+Math.random()*70,.09,'square',.028);if(state.bossHP===0){const prize=Math.round(state.level*120+state.bossMax*3);state.coins+=prize;state.bossWins++;toast('🏆 هزمت زعيم القش! +'+fmt(prize)+' 🪙');for(let i=0;i<80;i++)particles.push(makeParticle(pile.x,pile.base-pile.h*.3,'confetti'));beep(880,.25,'triangle');}save();updateHUD();}
 function win(){if(roundWin||state.remaining>0||state.bossHP>0)return;roundWin=true;const rarity=chooseRarity();const prize=Math.floor(130*Math.pow(state.level,1.35))+rarity.bonus;state.coins+=prize;state.needles++;state.album[rarity.id]=(state.album[rarity.id]||0)+1;const prizeNeedle=awardNeedle(rarity);state.found=true;state.drop=null;state.event=null;for(let i=0;i<95;i++)particles.push(makeParticle(pile.x+(Math.random()-.5)*pile.rx*.6,pile.base-pile.h*.55,'confetti'));
 $('winIcon').innerHTML=prizeNeedle===null?rarity.icon:needleArt(prizeNeedle,true);$('winTitle').textContent=prizeNeedle===null?'أكملت مجموعة الألف إبرة!':'حصلت على '+needleName(prizeNeedle)+'!';$('winMessage').textContent='أكملت كومة '+fmt(state.level)+' في '+currentLocation().name+'! '+(isBoss()?'وهزمت زعيم القش أيضاً! ':'')+(prizeNeedle===null?'الخزنة مكتملة، وخذت مكافأتك.':'الإبرة رقم '+String(prizeNeedle+1).padStart(4,'0')+' محفوظة في خزنتك.');$('winReward').textContent='🎁 مكافأة +'+fmt(prize)+' 🪙';save();updateHUD();beep(800,.15,'triangle');setTimeout(()=>beep(1030,.19,'triangle'),145);setTimeout(()=>show('winOverlay'),380);}
-function nextRound(){state.level++;state.total=totalFor(state.level);state.remaining=state.total;state.found=false;state.drop=null;state.event=null;state.bossHP=0;state.bossMax=0;state.milestones=[];roundWin=false;state.seed=state.level*9187+1741;save();updateHUD();hide('winOverlay');makeTextures();particles.length=0;toast('🌾 كومة جديدة جاهزة في '+currentLocation().name+'!');}
+function nextRound(){navigate('farm');state.level++;state.total=totalFor(state.level);state.remaining=state.total;state.found=false;state.drop=null;state.event=null;state.bossHP=0;state.bossMax=0;state.milestones=[];roundWin=false;state.seed=state.level*9187+1741;save();updateHUD();hide('winOverlay');makeTextures();particles.length=0;toast('🌾 كومة جديدة جاهزة في '+currentLocation().name+'!');}
 const NEEDLE_TOTAL=1000,VAULT_PAGE=40;
 let vaultPage=0,vaultMode='all',vaultJump='',vaultFromWin=false;
 const N_HEAD=['تاج','هلال','نجمة','قلب','شمس','لهب','زهرة','جناح','بلورة','مرساة'];
@@ -495,7 +582,7 @@ function awardNeedle(rarity){
  const roll=(state.seed*7919+state.level*104729+state.clicks*31)>>>0;
  const id=pool[roll%pool.length];state.vaultOwned.push(id);state.vaultOwned.sort((a,b)=>a-b);state.lastNeedle=id;return id;
 }
-function gallery(){vaultMode='all';vaultJump='';vaultPage=state.lastNeedle>=0?Math.floor(state.lastNeedle/VAULT_PAGE):0;renderVault();show('galleryOverlay');}
+function gallery(){vaultMode='all';vaultJump='';vaultPage=state.lastNeedle>=0?Math.floor(state.lastNeedle/VAULT_PAGE):0;navigate('vault');}
 function renderVault(){
  const owned=new Set(state.vaultOwned);let ids=[];
  for(let i=0;i<NEEDLE_TOTAL;i++)if((vaultMode==='all'||(vaultMode==='owned'&&owned.has(i))||(vaultMode.startsWith('t')&&tierFor(i)===Number(vaultMode.slice(1))))&&(!vaultJump||String(i+1).includes(vaultJump)))ids.push(i);
@@ -769,7 +856,7 @@ function drawHelpers(t){const active=helpers.filter(h=>state.helperOwned[h.id]>0
 function drawParticles(){for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=p.kind==='confetti'?.06:.18;p.vx*=.99;p.life--;p.rot+=p.dr;if(p.life<=0){particles.splice(i,1);continue;}ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.min(1,p.life/18);ctx.fillStyle=p.color;if(p.kind==='confetti')ctx.fillRect(-3,-3,7,5);else{ctx.fillRect(-5,-1.2,11,2.4);}ctx.restore();}}
 const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lastWeather=0;
-function draw(t){requestAnimationFrame(draw);if(width===0||height===0||document.hidden)return;
+function draw(t){requestAnimationFrame(draw);if(currentScreen!=='farm'||width===0||height===0||document.hidden)return;
 const frameGap=reduceMotion?65:(window.innerWidth<650?36:30);
 if(t-lastFrame<frameGap)return;
 if(t-lastWeather>1800){updateWeather(t);lastWeather=t;}lastFrame=t;ctx.setTransform(dpr,0,0,dpr,0,0);pileGeometry();background(t);drawStraw();drawForeground(t);if(state.bossHP>0)drawBoss(t);if(state.drop)drawDrop(t);drawHelpers(t);drawToolFX(t);drawParticles();wobble*=.82;}
@@ -782,12 +869,14 @@ const inside=dx<rx*1.13+15 && dy>=-27 && dy<h*1.19+21 && (dy<h*.25||dx<rx*(1-.43
 if(inside){collect(power(),x,y);}else if(y<base&&y>height*.19){toast('👆 اضغط على كومة القش الذهبية');}}
 canvas.addEventListener('pointerdown',e=>{e.preventDefault();const r=canvas.getBoundingClientRect();onTap(e.clientX-r.left,e.clientY-r.top);});
 canvas.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(state.bossHP>0)hitBoss(pile.x,pile.base-height*.2);else if(state.remaining<=0)win();else collect(power(),pile.x,pile.base-pile.h*.46);}});
-$('factoryText').onclick=()=>{$('factoryYard').scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'center'});};$('factoryPauseBtn').onclick=()=>{state.factoryPaused=!state.factoryPaused;save();updateHUD();toast(state.factoryPaused?'⏸ أوقفت المصنع مؤقتًا':'▶ عاد المصنع للعمل');};$('factoryUpgradeBtn').onclick=()=>{shopTab='factory';for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('selected',b.dataset.tab==='factory');renderShop();show('shopOverlay');};
-$('sellBtn').onclick=sell;$('shopBtn').onclick=showShop;$('galleryBtn').onclick=gallery;$('helpBtn').onclick=()=>show('helpOverlay');$('soundBtn').onclick=()=>{state.sound=!state.sound;updateHUD();save();if(state.sound)beep(720);};$('nextBtn').onclick=nextRound;$('winVaultBtn').onclick=()=>{vaultFromWin=true;hide('winOverlay');gallery();};
+$('factoryText').onclick=()=>navigate('factory');$('factoryPauseBtn').onclick=()=>{state.factoryPaused=!state.factoryPaused;save();updateHUD();toast(state.factoryPaused?'⏸ أوقفت المصنع مؤقتًا':'▶ عاد المصنع للعمل');};$('factoryUpgradeBtn').onclick=()=>showShop('factory');
+$('sellBtn').onclick=sell;$('factorySellBtn').onclick=sell;$('factoryBackToFarm').onclick=()=>navigate('farm');$('helpBtn').onclick=()=>show('helpOverlay');$('soundBtn').onclick=()=>{state.sound=!state.sound;updateHUD();save();if(state.sound)beep(720);};$('nextBtn').onclick=nextRound;$('winVaultBtn').onclick=()=>{vaultFromWin=true;hide('winOverlay');gallery();};
+for(const el of document.querySelectorAll('[data-view-tab]'))el.addEventListener('click',()=>{if(el.dataset.viewTab==='vault')gallery();else if(el.dataset.viewTab==='shop')showShop();else navigate(el.dataset.viewTab);});
+for(const el of document.querySelectorAll('[data-go]'))el.onclick=()=>navigate(el.dataset.go);
 for(const el of document.querySelectorAll('[data-close]'))el.onclick=()=>hide(el.dataset.close);
 for(const el of document.querySelectorAll('.overlay'))el.addEventListener('pointerdown',e=>{if(e.target===el&&el.id!=='winOverlay')hide(el.id)});
 $('shopTabs').addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t)return;shopTab=t.dataset.tab;for(const b of $('shopTabs').querySelectorAll('[data-tab]'))b.classList.toggle('selected',b===t);renderShop();});
-window.addEventListener('keydown',e=>{if(e.key==='Escape')for(const o of document.querySelectorAll('.overlay.show'))if(o.id!=='winOverlay')hide(o.id);});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'){let found=false;for(const o of document.querySelectorAll('.overlay.show'))if(o.id!=='winOverlay'){hide(o.id);found=true;}if(!found&&currentScreen!=='farm')navigate('farm');}});
 setInterval(()=>{if(document.hidden)return;const rate=roundWin?0:helperRate();if(rate>0&&state.remaining>0&&state.bag<cap())collect(rate,pile.x+pile.rx*.6,pile.base-pile.h*.5,true);processFactory();
 if(state.drop&&state.drop.until<=Date.now()){state.drop=null;save();}
 if(state.event&&state.event.until<=Date.now()){state.event=null;save();}
