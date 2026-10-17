@@ -43,7 +43,7 @@ button:active{transform:translateY(2px) scale(.988)}
 .action.blue{background:linear-gradient(#e1f0f1,#bfdfdb);border-color:#a3c2be;box-shadow:0 5px 0 #91b4b0,0 8px 16px #86632918}
 .action:disabled{filter:saturate(.5);opacity:.6;cursor:not-allowed}
 .footer{text-align:center;color:#ad9667;font-size:11px;font-weight:700;padding:5px 0 1px}
-#toast{position:fixed;z-index:200;top:20%;left:50%;transform:translate(-50%,-10px);padding:12px 20px;background:#283c32;color:#fffceb;border:2px solid #dae29a;border-radius:17px;box-shadow:0 12px 40px #24312b55;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;font-weight:900;max-width:95vw;text-align:center}#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;border:0!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;pointer-events:none!important}#toast.show{display:none!important}
 .overlay{position:fixed;z-index:100;inset:0;display:none;align-items:center;justify-content:center;padding:12px;background:#1d2e2ac9;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}.overlay.show{display:flex}
 .panel{max-width:670px;width:100%;max-height:min(85svh,790px);overflow:hidden;background:#fff9ed;border:3px solid #c99a52;border-radius:23px;box-shadow:0 12px 0 #50391f55,0 25px 90px #1e29216f;display:flex;flex-direction:column}
 .panelHead{padding:17px 18px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #efdfbe;gap:10px}.panelHead h2{margin:0;font-size:24px}.panelHead p{margin:2px 0 0;font-size:12px;color:#8b795c;font-weight:750}.close{width:37px;height:37px;background:#f6e4cd;border:1.5px solid #dab88a;border-radius:12px;font-size:23px;font-weight:800}
@@ -575,7 +575,7 @@ function navigate(view){
  }
  const activeEl=$(screens[view]);if(activeEl)activeEl.scrollTop=0; window.scrollTo(0,0);
 }
-function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(noticeTimeout);noticeTimeout=setTimeout(()=>el.classList.remove('show'),1550);}
+function toast(message){const el=$('toast');if(!el)return;el.textContent=message;el.classList.remove('show');}
 function show(id){$(id).classList.add('show');$(id).setAttribute('aria-hidden','false');}
 function hide(id){$(id).classList.remove('show');$(id).setAttribute('aria-hidden','true');if(id==='galleryOverlay'&&vaultFromWin){vaultFromWin=false;show('winOverlay');}}
 function purchase(kind,id){
@@ -620,7 +620,7 @@ if(lockedByStage){p.textContent+=' · '+stageGateText(unlockAt);card.classList.a
 if(lockedByStage){btn.classList.add('stageLockedBtn');btn.disabled=true;}else if(x.kind==='factoryInfo'){btn.textContent='يعمل الآن';btn.classList.add('owned');btn.disabled=true;}else if(x.active||x.maxed){btn.classList.add('owned');btn.disabled=true;}else if(x.owned)btn.classList.add('owned');else if(state.coins<x.price)btn.disabled=true;
 if(x.kind!=='factoryInfo')btn.addEventListener('click',()=>purchase(x.kind,x.id));main.append(h,p,btn);card.append(icon,main);el.append(card);}}
 function showShop(tab='tools'){shopTab=tab;navigate('shop');}
-function sell(){const preview=sellPreview();if(preview.total<=0){toast('لا يوجد قش أو بالات للبيع الآن');return;}state.coins+=preview.total;const soldBales=state.bales;state.bag=0;state.bales=0;beep(640,.14,'triangle');setTimeout(()=>beep(920,.12,'triangle'),95);toast('بعت '+(soldBales?fmt(soldBales)+' بالة و ':'')+'ربحت '+fmt(preview.total)+' 🪙');save();updateHUD();}
+function sell(){const preview=sellPreview();if(preview.total<=0){toast('لا يوجد قش أو بالات للبيع الآن');return;}state.coins+=preview.total;const soldBales=state.bales;state.bag=0;state.bales=0;beep(640,.14,'triangle');setTimeout(()=>beep(920,.12,'triangle'),95);save();updateHUD();}
 function collect(n,px,py,automatic=false){if(roundWin||state.remaining<=0||state.bossHP>0)return 0;
 let gained=Math.min(Math.max(0,Math.round(n)),state.remaining,Math.max(0,cap()-state.bag));if(gained===0){if(!automatic)toast('🧺 السلة ممتلئة! بِع القش أولاً');return 0;}state.bag+=gained;state.remaining-=gained;state.totalHay+=gained;wobble=.8;
 if(particles.length>150)particles.splice(0,particles.length-100);if(!automatic){hitFX={id:state.equipped,x:px,y:py,until:Date.now()+330};state.clicks++;const q=Math.min(26,Math.max(8,Math.round(9+Math.log2(gained+1)*3)));for(let i=0;i<q;i++)particles.push(makeParticle(px,py,'straw'));floatText(px,py,'+'+fmt(gained));beep(340+Math.min(420,gained*10),.046,'triangle',.022);if(Math.random()<.007+state.luckLevel*.0025&&state.clicks%7===0)spawnDrop(['chest','gold','bug'][Math.random()*3|0]);}
