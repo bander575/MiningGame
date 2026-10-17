@@ -203,6 +203,61 @@ body{background:radial-gradient(circle at 50% 0%,#fff9dc 0,#f8edce 48%,#ecd39e 1
 }
 @media(min-width:760px){.mainNav{left:calc(50% - 450px);right:calc(50% - 450px);border-radius:18px 18px 0 0}}
 
+
+/* V10 — adaptive height layout: no controls hidden behind the bottom bar. */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+#app{height:100vh;height:100svh;min-height:0;overflow:hidden;gap:7px;padding-top:max(7px,env(safe-area-inset-top));padding-bottom:0}
+#app>.footer{display:none}
+.top,.stats{flex:0 0 auto}
+.gameScreen{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-bottom:8px}
+.gameScreen.active{gap:9px}
+#farmScreen.active{display:flex;overflow:hidden;gap:6px;padding-bottom:4px}
+#farmScreen #crewStrip,#farmScreen .stageInfo,#farmScreen .farmActions{flex:0 0 auto}
+#farmScreen #stage{height:auto;min-height:0;flex:1 1 0;box-shadow:0 3px 0 #d5b47655;border-width:2px}
+#farmScreen .farmSellBtn{height:51px;font-size:15px;box-shadow:0 3px 0 #c59652}
+#farmScreen .farmSellBtn .emoji{font-size:21px}
+#farmScreen .farmSellBtn .desc{font-size:10px}
+#farmScreen #crewStrip{min-height:26px;padding:4px 8px;font-size:10px}
+#farmScreen .stageInfo{gap:8px;font-size:11px}
+#farmScreen .stageName{max-width:43%;overflow:hidden;text-overflow:ellipsis}
+.mainNav{position:relative;left:auto;right:auto;bottom:auto;z-index:20;flex:0 0 auto;margin:0 -9px;box-shadow:0 -4px 12px #5c431817;padding:5px max(8px,env(safe-area-inset-right)) calc(5px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));width:auto;min-height:61px}
+.mainTab{font-size:10.5px;gap:0;padding:3px 3px}
+.navGlyph{font-size:21px;line-height:1.1}
+#shopOverlay,#galleryOverlay{flex:1 1 0;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+#shopOverlay .panel,#galleryOverlay .panel{min-height:0;height:auto;flex:0 0 auto}
+#shopOverlay .shopItems,#galleryOverlay .vaultBody{overflow:visible}
+#factoryScreen{padding-bottom:18px}
+#factoryScreen .factoryYard{min-height:255px}
+@media(min-width:760px){.mainNav{left:auto;right:auto;border-radius:18px 18px 0 0;margin-left:0;margin-right:0}}
+@media(max-width:600px){
+ #app{padding-left:8px;padding-right:8px;gap:6px}
+ #farmScreen #stage{height:auto;min-height:0}
+ #factoryScreen .factoryYard{min-height:248px}
+ .mainNav{padding-top:4px;padding-bottom:calc(4px + env(safe-area-inset-bottom))}
+ .top{min-height:43px}
+ .brandMark{width:38px;height:38px;font-size:20px}
+ .brand h1{font-size:21px}
+ .brand p{font-size:10px}
+ .topBtn{min-width:36px;height:36px;font-size:17px}
+ .stat{padding:6px 7px}
+ .statIcon{width:28px;height:28px;font-size:16px}
+ .statLabel{font-size:10px}
+ .statNum{font-size:16px!important}
+ .bagAmount{font-size:17px}
+ .bagCapacity{font-size:10px}
+ .stats{gap:5px}
+ .sceneBottom .toolPill{font-size:9px}
+}
+@media(max-height:680px){
+ #farmScreen #crewStrip #luckText{display:none}
+ #farmScreen .scenePill{top:7px;padding:5px 10px;font-size:10px}
+ #farmScreen .sceneBottom{bottom:5px}
+ #farmScreen .toolPill,#farmScreen .littlePill{padding:4px 6px}
+ #farmScreen .farmSellBtn{height:44px}
+}
+
+
+.shopItem.stageLocked{opacity:.82;background:#f4efe4;border-style:dashed}.stageLockedBtn{background:#ddd7ca!important;color:#786c5b!important;font-size:11px}
 </style>
 </head>
 <body>
@@ -226,7 +281,7 @@ body{background:radial-gradient(circle at 50% 0%,#fff9dc 0,#f8edce 48%,#ecd39e 1
 <button class="action farmSellBtn" id="sellBtn"><span class="emoji">💰</span><span>بيع القش <span class="desc" id="sellText">السلة فارغة</span></span></button>
 
 
-</section></section><section class="gameScreen" data-view="factory" id="factoryScreen"><div class="screenHeader"><div class="screenEyebrow">الإنتاج والتصنيع</div><h2>🏭 مصنع بالات القش</h2><p>القش اللي تجمعه يدخل السير الناقل، وينضغط قدامك إلى بالات مربعة قابلة للبيع.</p></div><div class="factoryOverview"><div class="overviewItem"><span>قش في السلة</span><strong dir="ltr" id="factoryLooseStat">0</strong></div><div class="overviewItem"><span>بالات جاهزة</span><strong dir="ltr" id="factoryReadyStat">0</strong></div><div class="overviewItem"><span>سحب المصنع/ث</span><strong dir="ltr" id="factoryRateStat">10</strong></div></div><section aria-label="مصنع القش والمكبس والسير الناقل" class="factoryYard" id="factoryYard">
+</section></section><section class="gameScreen" data-view="factory" id="factoryScreen"><div class="screenHeader"><div class="screenEyebrow">الإنتاج والتصنيع · ترقيات بالمراحل</div><h2>🏭 مصنع بالات القش</h2><p>القش اللي تجمعه يدخل السير الناقل، وينضغط قدامك إلى بالات مربعة قابلة للبيع.</p></div><div class="factoryOverview"><div class="overviewItem"><span>قش في السلة</span><strong dir="ltr" id="factoryLooseStat">0</strong></div><div class="overviewItem"><span>بالات جاهزة</span><strong dir="ltr" id="factoryReadyStat">0</strong></div><div class="overviewItem"><span>سحب المصنع/ث</span><strong dir="ltr" id="factoryRateStat">10</strong></div></div><section aria-label="مصنع القش والمكبس والسير الناقل" class="factoryYard" id="factoryYard">
 <div class="factoryHead">
 <div><h2>مصنع بالات القش <span class="factoryLive" id="factoryMode">جاهز للعمل</span></h2><p>القش من السلة ← السير الناقل ← المكبس ← بالات مربّعة</p></div>
 <div class="factoryBadge"><strong dir="ltr" id="factoryBalesCount">0</strong><small>بالة جاهزة</small></div>
@@ -281,7 +336,7 @@ body{background:radial-gradient(circle at 50% 0%,#fff9dc 0,#f8edce 48%,#ecd39e 1
 <button class="factoryControlBtn" id="factoryPauseBtn" type="button">⏸ إيقاف</button>
 <button class="factoryControlBtn primary" id="factoryUpgradeBtn" type="button">⚙️ تطوير المصنع</button>
 </div>
-</section><div class="factoryScreenActions"><button class="action factorySellAction" id="factorySellBtn" type="button">💰 <span>بيع القش والبالات <small id="factorySellInfo">0 عملة</small></span></button><button class="factorySecondaryAction" id="factoryBackToFarm" type="button">🌾 ارجع للمزرعة</button></div></section><div aria-hidden="true" class="gameScreen" data-view="shop" id="shopOverlay"><section class="panel"><div class="panelHead"><div><h2>🛒 متجر المزرعة</h2><p>أدوات، آلات، حيوانات ومساعدون حقيقيون</p></div><button aria-label="إغلاق" class="close" data-go="farm" title="العودة للمزرعة">×</button></div><div class="tabs" id="shopTabs"><button class="tab selected" data-tab="tools">🧤 الأدوات</button><button class="tab" data-tab="upgrades">⚡ التطويرات</button><button class="tab" data-tab="helpers">🐣 المساعدون</button><button class="tab" data-tab="factory">🏭 المصنع</button></div><div class="shopItems" id="shopItems"></div></section></div><div aria-hidden="true" class="gameScreen" data-view="vault" id="galleryOverlay"><section class="panel vaultPanel"><div class="panelHead"><div><h2>🗝️ خزنة الإبر</h2><p>خزنة حقيقية فيها 1,000 موضع لإبر فريدة</p></div><button aria-label="إغلاق" class="close" data-go="farm" title="العودة للمزرعة">×</button></div><div class="vaultBody" id="galleryBody"></div></section></div>
+</section><div class="factoryScreenActions"><button class="action factorySellAction" id="factorySellBtn" type="button">💰 <span>بيع القش والبالات <small id="factorySellInfo">0 عملة</small></span></button><button class="factorySecondaryAction" id="factoryBackToFarm" type="button">🌾 ارجع للمزرعة</button></div></section><div aria-hidden="true" class="gameScreen" data-view="shop" id="shopOverlay"><section class="panel"><div class="panelHead"><div><h2>🛒 متجر المزرعة</h2><p>معدات تُفتح بالتدريج كلما أنهيت أكوام القش</p></div><button aria-label="إغلاق" class="close" data-go="farm" title="العودة للمزرعة">×</button></div><div class="tabs" id="shopTabs"><button class="tab selected" data-tab="tools">🧤 الأدوات</button><button class="tab" data-tab="upgrades">⚡ التطويرات</button><button class="tab" data-tab="helpers">🐣 المساعدون</button><button class="tab" data-tab="factory">🏭 المصنع</button></div><div class="shopItems" id="shopItems"></div></section></div><div aria-hidden="true" class="gameScreen" data-view="vault" id="galleryOverlay"><section class="panel vaultPanel"><div class="panelHead"><div><h2>🗝️ خزنة الإبر</h2><p>خزنة حقيقية فيها 1,000 موضع لإبر فريدة</p></div><button aria-label="إغلاق" class="close" data-go="farm" title="العودة للمزرعة">×</button></div><div class="vaultBody" id="galleryBody"></div></section></div>
 
 
 
@@ -301,24 +356,24 @@ const canvas=$('scene'),ctx=canvas.getContext('2d',{alpha:false});
 const ST_KEY='haystack-clicker-2d-v1';
 const tools=[
 {id:'hand',name:'اليد',emoji:'✋',power:1,price:0,desc:'بداية المغامرة، قشة واحدة في النقرة.'},
-{id:'rake',name:'مشط القش',emoji:'🧹',power:4,price:35,desc:'يمشط الخصل بسرعة، +4 قش لكل نقرة.'},
-{id:'fork',name:'الشوكة الزراعية',emoji:'🔱',power:11,price:190,desc:'تقلع حفنات كبيرة من القش، +11.'},
-{id:'blower',name:'منفاخ العواصف',emoji:'💨',power:26,price:850,desc:'ريح قوية وتأثير قش متطاير، +26.'},
-{id:'vacuum',name:'شفاط المزرعة',emoji:'🌀',power:66,price:3600,desc:'يمتص القش دفعة واحدة، +66.'},
-{id:'tractor',name:'الحصادة الصغيرة',emoji:'🚜',power:150,price:13000,desc:'دوران العجلة ومضاعفة الجهد، +150.'},
-{id:'laser',name:'ليزر القش',emoji:'⚡',power:420,price:49000,desc:'شعاع خاطف يحصد القش، +420.'},
-{id:'tornado',name:'دوامة عملاقة',emoji:'🌪️',power:1050,price:150000,desc:'شفط سريع وتأثير عاصفة، +1,050.'},
-{id:'giant',name:'آلة العمالقة',emoji:'🏗️',power:3000,price:600000,desc:'معدات النهاية: 3,000 قشة بنقرة.'}
+{id:'rake',name:'مشط القش',emoji:'🧹',power:4,price:220,desc:'يمشط الخصل بسرعة، +4 قش لكل نقرة.'},
+{id:'fork',name:'الشوكة الزراعية',emoji:'🔱',power:11,price:1900,desc:'تقلع حفنات كبيرة من القش، +11.'},
+{id:'blower',name:'منفاخ العواصف',emoji:'💨',power:26,price:13500,desc:'ريح قوية وتأثير قش متطاير، +26.'},
+{id:'vacuum',name:'شفاط المزرعة',emoji:'🌀',power:66,price:100000,desc:'يمتص القش دفعة واحدة، +66.'},
+{id:'tractor',name:'الحصادة الصغيرة',emoji:'🚜',power:150,price:650000,desc:'دوران العجلة ومضاعفة الجهد، +150.'},
+{id:'laser',name:'ليزر القش',emoji:'⚡',power:420,price:5200000,desc:'شعاع خاطف يحصد القش، +420.'},
+{id:'tornado',name:'دوامة عملاقة',emoji:'🌪️',power:1050,price:38000000,desc:'شفط سريع وتأثير عاصفة، +1,050.'},
+{id:'giant',name:'آلة العمالقة',emoji:'🏗️',power:3000,price:280000000,desc:'معدات النهاية: 3,000 قشة بنقرة.'}
 ];
 const locations=[
 {name:'مزرعة القش',icon:'🌾',sky:['#80cbe4','#eaf5cd'],land:['#b9d38a','#66aa72'],barn:'#c96950',type:'farm',hint:'هنا كل الكومات، وكل المغامرة داخل المزرعة.'}
 ];
 const helpers=[
-{id:'chicken',name:'الدجاجة الريفية',icon:'chicken',rate:2,price:160,desc:'دجاجة صغيرة تنقر القش بمعدل +2 قش/ثانية لكل مستوى.',max:5},
-{id:'ant',name:'النملة العاملة',icon:'ant',rate:6,price:750,desc:'نملة نشيطة تنقل القش بمعدل +6 قش/ثانية لكل مستوى.',max:5},
-{id:'dog',name:'كلب الحراسة',icon:'dog',rate:16,price:3300,desc:'كلب مزرعة ذكي يحفر بمعدل +16 قش/ثانية.',max:5},
-{id:'robot',name:'روبوت الحقل',icon:'robot',rate:45,price:18000,desc:'روبوت صغير يجمع +45 قش/ثانية لكل مستوى.',max:5},
-{id:'machine',name:'آلة الشفط',icon:'machine',rate:120,price:75000,desc:'آلة مزرعة قوية تشفط +120 قش/ثانية لكل مستوى.',max:5}
+{id:'chicken',name:'الدجاجة الريفية',icon:'chicken',rate:2,price:450,desc:'دجاجة صغيرة تنقر القش بمعدل +2 قش/ثانية لكل مستوى.',max:5},
+{id:'ant',name:'النملة العاملة',icon:'ant',rate:6,price:6500,desc:'نملة نشيطة تنقل القش بمعدل +6 قش/ثانية لكل مستوى.',max:5},
+{id:'dog',name:'كلب الحراسة',icon:'dog',rate:16,price:65000,desc:'كلب مزرعة ذكي يحفر بمعدل +16 قش/ثانية.',max:5},
+{id:'robot',name:'روبوت الحقل',icon:'robot',rate:45,price:850000,desc:'روبوت صغير يجمع +45 قش/ثانية لكل مستوى.',max:5},
+{id:'machine',name:'آلة الشفط',icon:'machine',rate:120,price:12000000,desc:'آلة مزرعة قوية تشفط +120 قش/ثانية لكل مستوى.',max:5}
 ];
 const rarities=[
 {id:'iron',name:'الإبرة الحديدية',icon:'🪡',color:'#909da4',weight:45,bonus:90},
@@ -383,7 +438,7 @@ function helperRate(){return state.helperLevel*4+helpers.reduce((a,h)=>a+h.rate*
 function isBoss(){return state.level%5===0;}
 function activeEvent(){return state.event&&state.event.until>Date.now()?state.event:null;}
 function multiplier(){return activeEvent()?.id==='frenzy'?5:1;}
-function lootValue(){return Math.ceil(state.level*14+Math.sqrt(state.total)*2);}
+function lootValue(){return Math.ceil(state.level*7+Math.sqrt(state.total)*1.2);}
 function msgEvent(str,duration=1700){toast(str);$('eventBanner').textContent=str;$('eventBanner').classList.add('on');if(!state.event) setTimeout(()=>{if(!state.event)$('eventBanner').classList.remove('on');},duration);}
 function dropPosition(){return {x:pile.x+(state.drop?.px||0)*pile.rx*.65,y:pile.base-pile.h*.45+(state.drop?.py||0)*Math.max(30,pile.h*.4)};}
 function spawnDrop(type){if(state.drop||state.remaining<=0||roundWin||state.bossHP>0)return;state.drop={type,px:(Math.random()*1.5-.75),py:(Math.random()-.5),until:Date.now()+12000};save();updateHUD();}
@@ -407,16 +462,33 @@ function compact(n){
   if(display>=1000&&unit<units.length-1)return sign+'1'+units[unit+1];
   return sign+display+units[unit];
 }
-function cap(){return Math.floor(24*Math.pow(1.85,state.capacityLevel));}
+function cap(){return Math.floor(24*Math.pow(1.63,state.capacityLevel));}
 function power(){return (tools.find(t=>t.id===state.equipped).power+state.powerLevel*2)*multiplier()*(activeEvent()?.id==='magnet'?2:1);}
-function sellRate(){return (1+state.valueLevel*.5)*(activeEvent()?.id==='double'?2:1);}
-function totalFor(level){return Math.round(Math.min(1e10,180*Math.pow(1.42,level-1)));}
-function upgradeCost(kind){return Math.round(({capacity:40,power:90,value:120,helper:300,luck:175})[kind] *Math.pow(({capacity:2.4,power:2.55,value:2.55,helper:3.25,luck:2.4})[kind],state[kind+'Level']));}
+function sellRate(){return (1+state.valueLevel*.18)*(activeEvent()?.id==='double'?2:1);}
+function totalFor(level){return Math.round(Math.min(1e10,180*Math.pow(1.20,level-1)));}
+function upgradeCost(kind){return Math.round(({capacity:140,power:320,value:500,helper:1300,luck:700})[kind] *Math.pow(({capacity:2.60,power:2.75,value:3.0,helper:3.45,luck:3.0})[kind],state[kind+'Level']));}
+const TOOL_STAGES={hand:1,rake:2,fork:4,blower:7,vacuum:11,tractor:16,laser:23,tornado:31,giant:43};
+const HELPER_STAGES={chicken:3,ant:7,dog:13,robot:21,machine:33};
+const FACTORY_STAGES={Rate:3,Press:6,Value:9};
+function stageRequired(kind,id){
+ if(kind==='tool')return TOOL_STAGES[id]||1;
+ if(kind==='helper')return HELPER_STAGES[id]||1;
+ if(kind==='factory')return FACTORY_STAGES[id]||1;
+ if(kind==='upgrade')return id==='luck'?5:id==='value'?3:1;
+ return 1;
+}
+function nextLevelCap(kind,id){
+ if(kind==='upgrade')return id==='luck'?Math.min(12,1+Math.floor((state.level-5)/4)) :Math.min(20,1+Math.floor((state.level-1)/3));
+ if(kind==='factory')return Math.min(10,1+Math.floor((state.level-stageRequired(kind,id))/4));
+ if(kind==='helper')return Math.min(5,1+Math.floor((state.level-stageRequired(kind,id))/5));
+ return 999;
+}
+function stageGateText(n){return 'تُفتح عند كومة '+compact(n);}
 function factoryLevel(kind){return state['factory'+kind+'Level'];}
-function factoryCost(kind){const base={Rate:240,Press:300,Value:380}[kind],scale={Rate:2.12,Press:2.18,Value:2.24}[kind];return Math.round(base*Math.pow(scale,factoryLevel(kind)));}
-function factoryIntake(){return 10+state.factoryRateLevel*10;}
+function factoryCost(kind){const base={Rate:1900,Press:4700,Value:8500}[kind],scale={Rate:2.85,Press:2.95,Value:3.0}[kind];return Math.round(base*Math.pow(scale,factoryLevel(kind)));}
+function factoryIntake(){return 7+state.factoryRateLevel*7;}
 function baleSize(){return Math.max(28,72-state.factoryPressLevel*4);}
-function baleValue(){return Math.floor(baleSize()*sellRate()*(1.35+state.factoryValueLevel*.18));}
+function baleValue(){return Math.floor(baleSize()*sellRate()*(1.24+state.factoryValueLevel*.12));}
 function factoryFillRatio(){return Math.min(1,state.factoryStored/Math.max(1,baleSize()));}
 function sellPreview(){const loose=Math.floor(state.bag*sellRate()),balesValue=state.bales*baleValue();return {loose,bales:balesValue,total:loose+balesValue};}
 
@@ -461,16 +533,16 @@ function navigate(view){
    requestAnimationFrame(()=>fit());
    if(vaultFromWin&&roundWin){vaultFromWin=false;show('winOverlay');}
  }
- window.scrollTo(0,0);
+ const activeEl=$(screens[view]);if(activeEl)activeEl.scrollTop=0; window.scrollTo(0,0);
 }
 function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(noticeTimeout);noticeTimeout=setTimeout(()=>el.classList.remove('show'),1550);}
 function show(id){$(id).classList.add('show');$(id).setAttribute('aria-hidden','false');}
 function hide(id){$(id).classList.remove('show');$(id).setAttribute('aria-hidden','true');if(id==='galleryOverlay'&&vaultFromWin){vaultFromWin=false;show('winOverlay');}}
 function purchase(kind,id){
-if(kind==='tool'){const t=tools.find(x=>x.id===id);if(!t)return;if(state.owned.includes(id)){state.equipped=id;toast('جهزت '+t.name+' '+t.emoji);beep(580);}else if(state.coins>=t.price){state.coins-=t.price;state.owned.push(id);state.equipped=id;toast('مبروك! اشتريت '+t.name);beep(820,.16,'triangle');}else{toast('ما عندك عملات كفاية 🪙');return;}}
-else if(kind==='helper'){const h=helpers.find(x=>x.id===id);if(!h)return;const lvl=state.helperOwned[id],cost=Math.round(h.price*Math.pow(2.55,lvl));if(lvl>=h.max||state.coins<cost)return;state.coins-=cost;state.helperOwned[id]++;toast('انضم إليك '+h.name+'!');beep(850,.16,'triangle');}
-else if(kind==='factory'){const key='factory'+id+'Level',cost=factoryCost(id);if(state.coins<cost||state[key]>=10)return;state.coins-=cost;state[key]++;toast('تم تطوير '+(id==='Rate'?'ناقل المصنع':id==='Press'?'مكبس البالات':'جودة البالات')+'!');beep(800,.16,'triangle');}
-else{const idx=id+'Level',cost=upgradeCost(id);if(state.coins<cost)return;if((id==='luck'&&state.luckLevel>=12)||state[idx]>=20)return;state.coins-=cost;state[idx]++;toast('تم تطوير '+({capacity:'سلة القش',power:'قوة الجمع',value:'سعر القش',helper:'المساعد',luck:'الحظ'})[id]+'!');beep(800,.16,'triangle');}
+if(kind==='tool'){const t=tools.find(x=>x.id===id);if(!t)return;if(!state.owned.includes(id)&&state.level<stageRequired(kind,id)){toast(stageGateText(stageRequired(kind,id)));return;}if(state.owned.includes(id)){state.equipped=id;toast('جهزت '+t.name+' '+t.emoji);beep(580);}else if(state.coins>=t.price){state.coins-=t.price;state.owned.push(id);state.equipped=id;toast('مبروك! اشتريت '+t.name);beep(820,.16,'triangle');}else{toast('ما عندك عملات كفاية 🪙');return;}}
+else if(kind==='helper'){const h=helpers.find(x=>x.id===id);if(!h)return;const lvl=state.helperOwned[id],cost=Math.round(h.price*Math.pow(3.05,lvl));if(state.level<stageRequired(kind,id)||lvl>=nextLevelCap(kind,id)){toast(stageGateText(Math.max(stageRequired(kind,id),stageRequired(kind,id)+5*lvl)));return;}if(lvl>=h.max||state.coins<cost)return;state.coins-=cost;state.helperOwned[id]++;toast('انضم إليك '+h.name+'!');beep(850,.16,'triangle');}
+else if(kind==='factory'){const key='factory'+id+'Level',cost=factoryCost(id);if(state.level<stageRequired(kind,id)||state[key]>=nextLevelCap(kind,id)){toast('تطوير متاح في كومة أعلى');return;}if(state.coins<cost||state[key]>=10)return;state.coins-=cost;state[key]++;toast('تم تطوير '+(id==='Rate'?'ناقل المصنع':id==='Press'?'مكبس البالات':'جودة البالات')+'!');beep(800,.16,'triangle');}
+else{const idx=id+'Level',cost=upgradeCost(id);if(state.level<stageRequired(kind,id)||state[idx]>=nextLevelCap(kind,id)){toast('أكمل أكوام أكثر لفتح التطوير التالي');return;}if(state.coins<cost)return;if((id==='luck'&&state.luckLevel>=12)||state[idx]>=20)return;state.coins-=cost;state[idx]++;toast('تم تطوير '+({capacity:'سلة القش',power:'قوة الجمع',value:'سعر القش',helper:'المساعد',luck:'الحظ'})[id]+'!');beep(800,.16,'triangle');}
 save();updateHUD();renderShop();}
 
 function helperCardArt(kind){
@@ -485,7 +557,7 @@ function helperCardArt(kind){
 function renderShop(){const el=$('shopItems');el.textContent='';const items=[];
 if(shopTab==='tools')for(const t of tools)items.push({id:t.id,kind:'tool',icon:t.emoji,title:t.name,sub:t.desc,price:t.price,owned:state.owned.includes(t.id),active:state.equipped===t.id});
 else if(shopTab==='upgrades'){
-items.push({id:'capacity',kind:'upgrade',icon:'🧺',title:'سلة أكبر · مستوى '+state.capacityLevel,sub:'سعتك الآن '+fmt(cap())+' ← القادم '+fmt(Math.floor(24*Math.pow(1.85,state.capacityLevel+1))),price:upgradeCost('capacity'),maxed:state.capacityLevel>=20});
+items.push({id:'capacity',kind:'upgrade',icon:'🧺',title:'سلة أكبر · مستوى '+state.capacityLevel,sub:'سعتك الآن '+fmt(cap())+' ← القادم '+fmt(Math.floor(24*Math.pow(1.63,state.capacityLevel+1))),price:upgradeCost('capacity'),maxed:state.capacityLevel>=20});
 items.push({id:'power',kind:'upgrade',icon:'💪',title:'قوة الجمع · مستوى '+state.powerLevel,sub:'زيادة +2 قش في كل ضغطة على أي أداة.',price:upgradeCost('power'),maxed:state.powerLevel>=20});
 items.push({id:'value',kind:'upgrade',icon:'💎',title:'سعر القش · مستوى '+state.valueLevel,sub:'ضاعف أرباح البيع: ×'+sellRate().toFixed(1)+' الآن.',price:upgradeCost('value'),maxed:state.valueLevel>=20});
 items.push({id:'luck',kind:'upgrade',icon:'🍀',title:'حظ المغامرة · مستوى '+state.luckLevel,sub:'يزيد فرصة المفاجآت والإبر النادرة ومدة الحُمّى.',price:upgradeCost('luck'),maxed:state.luckLevel>=12});}
@@ -494,8 +566,16 @@ items.push({id:'Rate',kind:'factory',icon:'📥',title:'ناقل القش · م�
 items.push({id:'Press',kind:'factory',icon:'🧱',title:'المكبس الهيدروليكي · مستوى '+state.factoryPressLevel,sub:'كل بالة تحتاج '+fmt(baleSize())+' قش فقط. أسرع وأقوى.',price:factoryCost('Press'),maxed:state.factoryPressLevel>=10});
 items.push({id:'Value',kind:'factory',icon:'💰',title:'جودة البالات · مستوى '+state.factoryValueLevel,sub:'قيمة البالة الآن '+fmt(baleValue())+' 🪙.',price:factoryCost('Value'),maxed:state.factoryValueLevel>=10});
 items.push({id:'info',kind:'factoryInfo',icon:'🏭',title:'مصنع البالات',sub:'المصنع يعمل تلقائياً: يسحب القش من السلة، يضغطه إلى بالات مربعة، ثم تبيعها مع القش من زر البيع.',price:0,maxed:true});}
-else for(const h of helpers){const lvl=state.helperOwned[h.id];items.push({id:h.id,kind:'helper',icon:helperCardArt(h.icon),title:h.name+' · مستوى '+lvl,sub:h.desc+' المجموع '+fmt(h.rate*lvl)+'/ث',price:Math.round(h.price*Math.pow(2.55,lvl)),maxed:lvl>=h.max});}
-for(const x of items){const card=document.createElement('div');card.className='shopItem';const icon=document.createElement('div');icon.className='shopIcon';if(x.kind==='helper')icon.innerHTML=x.icon;else icon.textContent=x.icon;const main=document.createElement('div');main.className='itemMain';const h=document.createElement('h3');h.textContent=x.title;const p=document.createElement('p');p.textContent=x.sub;const btn=document.createElement('button');btn.className='buy';btn.textContent=x.active?'✓ مجهزة':x.maxed?'✅ مكتمل':x.owned?'استخدم':fmt(x.price)+' 🪙';if(x.kind==='factoryInfo'){btn.textContent='يعمل الآن';btn.classList.add('owned');btn.disabled=true;}else if(x.active||x.maxed){btn.classList.add('owned');btn.disabled=true;}else if(x.owned)btn.classList.add('owned');else if(state.coins<x.price)btn.disabled=true;
+else for(const h of helpers){const lvl=state.helperOwned[h.id];items.push({id:h.id,kind:'helper',icon:helperCardArt(h.icon),title:h.name+' · مستوى '+lvl,sub:h.desc+' المجموع '+fmt(h.rate*lvl)+'/ث',price:Math.round(h.price*Math.pow(3.05,lvl)),maxed:lvl>=h.max});}
+for(const x of items){const card=document.createElement('div');card.className='shopItem';const icon=document.createElement('div');icon.className='shopIcon';if(x.kind==='helper')icon.innerHTML=x.icon;else icon.textContent=x.icon;const main=document.createElement('div');main.className='itemMain';const h=document.createElement('h3');h.textContent=x.title;const p=document.createElement('p');p.textContent=x.sub;const btn=document.createElement('button');btn.className='buy';
+const stageNeed=stageRequired(x.kind,x.id);
+const currentUpgrade=x.kind==='upgrade'?state[x.id+'Level']:(x.kind==='factory'?state['factory'+x.id+'Level']:(x.kind==='helper'?state.helperOwned[x.id]:0));
+const maxUntilStage=['upgrade','factory','helper'].includes(x.kind)&&currentUpgrade>=nextLevelCap(x.kind,x.id);
+const lockedByStage=!(x.owned||x.active||x.maxed||x.kind==='factoryInfo')&&(state.level<stageNeed||maxUntilStage);
+const unlockAt=state.level<stageNeed?stageNeed:(x.kind==='helper'?stageNeed+5*currentUpgrade:x.kind==='factory'?stageNeed+4*currentUpgrade:x.kind==='upgrade'&&x.id==='luck'?5+4*currentUpgrade:Math.max(stageNeed,1+3*currentUpgrade));
+btn.textContent=lockedByStage?'🔒 كومة '+compact(unlockAt):x.active?'✓ مجهزة':x.maxed?'✅ مكتمل':x.owned?'استخدم':compact(x.price)+' 🪙';
+if(lockedByStage){p.textContent+=' · '+stageGateText(unlockAt);card.classList.add('stageLocked');}
+if(lockedByStage){btn.classList.add('stageLockedBtn');btn.disabled=true;}else if(x.kind==='factoryInfo'){btn.textContent='يعمل الآن';btn.classList.add('owned');btn.disabled=true;}else if(x.active||x.maxed){btn.classList.add('owned');btn.disabled=true;}else if(x.owned)btn.classList.add('owned');else if(state.coins<x.price)btn.disabled=true;
 if(x.kind!=='factoryInfo')btn.addEventListener('click',()=>purchase(x.kind,x.id));main.append(h,p,btn);card.append(icon,main);el.append(card);}}
 function showShop(tab='tools'){shopTab=tab;navigate('shop');}
 function sell(){const preview=sellPreview();if(preview.total<=0){toast('لا يوجد قش أو بالات للبيع الآن');return;}state.coins+=preview.total;const soldBales=state.bales;state.bag=0;state.bales=0;beep(640,.14,'triangle');setTimeout(()=>beep(920,.12,'triangle'),95);toast('بعت '+(soldBales?fmt(soldBales)+' بالة و ':'')+'ربحت '+fmt(preview.total)+' 🪙');save();updateHUD();}
@@ -506,7 +586,7 @@ else{for(let i=0;i<Math.min(5,gained);i++)particles.push(makeParticle(pile.x+pil
 if(state.remaining===0){state.drop=null;state.event=null;if(isBoss()){state.bossMax=Math.ceil(25+state.level*12+state.total*.14);state.bossHP=state.bossMax;toast('👹 ظهر زعيم القش! انقر عليه!');beep(210,.35,'sawtooth');}else{toast('✨ ظهرت الإبرة! المسها لتلتقطها');beep(1050,.2,'sine');}}
 else milestones();save();updateHUD();return gained;}
 function hitBoss(x,y){if(state.bossHP<=0)return;const damage=Math.max(4,Math.ceil(power()*2));bossHitUntil=performance.now()+210;state.bossHP=Math.max(0,state.bossHP-damage);for(let i=0;i<18;i++)particles.push(makeParticle(x,y,'straw'));floatText(x,y,'⚔️ '+fmt(damage),true);wobble=1.7;beep(220+Math.random()*70,.09,'square',.028);if(state.bossHP===0){const prize=Math.round(state.level*120+state.bossMax*3);state.coins+=prize;state.bossWins++;toast('🏆 هزمت زعيم القش! +'+fmt(prize)+' 🪙');for(let i=0;i<80;i++)particles.push(makeParticle(pile.x,pile.base-pile.h*.3,'confetti'));beep(880,.25,'triangle');}save();updateHUD();}
-function win(){if(roundWin||state.remaining>0||state.bossHP>0)return;roundWin=true;const rarity=chooseRarity();const prize=Math.floor(130*Math.pow(state.level,1.35))+rarity.bonus;state.coins+=prize;state.needles++;state.album[rarity.id]=(state.album[rarity.id]||0)+1;const prizeNeedle=awardNeedle(rarity);state.found=true;state.drop=null;state.event=null;for(let i=0;i<95;i++)particles.push(makeParticle(pile.x+(Math.random()-.5)*pile.rx*.6,pile.base-pile.h*.55,'confetti'));
+function win(){if(roundWin||state.remaining>0||state.bossHP>0)return;roundWin=true;const rarity=chooseRarity();const prize=Math.floor(75+35*Math.pow(state.level,1.22))+rarity.bonus;state.coins+=prize;state.needles++;state.album[rarity.id]=(state.album[rarity.id]||0)+1;const prizeNeedle=awardNeedle(rarity);state.found=true;state.drop=null;state.event=null;for(let i=0;i<95;i++)particles.push(makeParticle(pile.x+(Math.random()-.5)*pile.rx*.6,pile.base-pile.h*.55,'confetti'));
 $('winIcon').innerHTML=prizeNeedle===null?rarity.icon:needleArt(prizeNeedle,true);$('winTitle').textContent=prizeNeedle===null?'أكملت مجموعة الألف إبرة!':'حصلت على '+needleName(prizeNeedle)+'!';$('winMessage').textContent='أكملت كومة '+fmt(state.level)+' في '+currentLocation().name+'! '+(isBoss()?'وهزمت زعيم القش أيضاً! ':'')+(prizeNeedle===null?'الخزنة مكتملة، وخذت مكافأتك.':'الإبرة رقم '+String(prizeNeedle+1).padStart(4,'0')+' محفوظة في خزنتك.');$('winReward').textContent='🎁 مكافأة +'+fmt(prize)+' 🪙';save();updateHUD();beep(800,.15,'triangle');setTimeout(()=>beep(1030,.19,'triangle'),145);setTimeout(()=>show('winOverlay'),380);}
 function nextRound(){navigate('farm');state.level++;state.total=totalFor(state.level);state.remaining=state.total;state.found=false;state.drop=null;state.event=null;state.bossHP=0;state.bossMax=0;state.milestones=[];roundWin=false;state.seed=state.level*9187+1741;save();updateHUD();hide('winOverlay');makeTextures();particles.length=0;toast('🌾 كومة جديدة جاهزة في '+currentLocation().name+'!');}
 const NEEDLE_TOTAL=1000,VAULT_PAGE=40;
@@ -881,7 +961,7 @@ setInterval(()=>{if(document.hidden)return;const rate=roundWin?0:helperRate();if
 if(state.drop&&state.drop.until<=Date.now()){state.drop=null;save();}
 if(state.event&&state.event.until<=Date.now()){state.event=null;save();}
 updateHUD();},1000);
-window.addEventListener('resize',fit);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});window.addEventListener('pagehide',save);
+if(typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>{if(currentScreen==='farm'&&canvas.clientWidth>0)fit();}).observe($('stage'));}window.addEventListener('resize',fit);document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});window.addEventListener('pagehide',save);
 makeTextures();updateHUD();fit();requestAnimationFrame(draw);if(roundWin){setTimeout(()=>{const prize=Math.floor(130*Math.pow(state.level,1.35));$('winIcon').textContent='🪡✨';$('winTitle').textContent='جاهز للتحدي القادم؟';$('winMessage').textContent='سبق أنك لقيت إبرة هذه الكومة. ابدأ كومة جديدة!';$('winReward').textContent='الإبر المكتشفة: '+fmt(state.needles);show('winOverlay');},250);}
 })();
 </script>
