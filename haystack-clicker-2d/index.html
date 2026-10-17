@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f8ecce">
-<title>إبرة وسط القش | لعبة نقر 2D</title>
+<title>إبرة وسط القش | حارس القش</title>
 <style>
 :root{--ink:#283b37;--muted:#738178;--gold:#efa93d;--darkgold:#cb7a22;--cream:#fff9ec;--outline:#8c6336;--grass:#4d925c;--paper:#fffdf6}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -80,7 +80,7 @@ button:active{transform:translateY(2px) scale(.988)}
  <div class="topActions"><button class="topBtn" id="soundBtn" title="تشغيل / إيقاف الصوت">🔊</button><button class="topBtn" id="helpBtn" title="طريقة اللعب">❔</button></div>
 </header>
 <section class="stats">
- <div class="stat"><div class="statIcon">🪙</div><div><span class="statLabel">العملات</span><span id="coins" class="statNum">0 <small>🪙</small></span></div></div>
+ <div class="stat"><div class="statIcon">🪙</div><div><span class="statLabel">العملات</span><span id="coins" class="statNum" dir="ltr">0</span></div></div>
  <div class="stat"><div class="statIcon">🧺</div><div><span class="statLabel">سلة القش</span><span id="bag" class="statNum">0/20</span></div></div>
  <div class="stat"><div class="statIcon">✨</div><div><span class="statLabel">الإبر المكتشفة</span><span id="needles" class="statNum">0</span></div></div>
 </section>
@@ -92,13 +92,13 @@ button:active{transform:translateY(2px) scale(.988)}
  <div class="sceneBottom"><div class="toolPill" id="toolDisplay">✋ الأداة: اليد · +1 قش/نقرة</div><div class="littlePill" id="remaining">باقي 180 قشة</div></div>
  <div id="floatLayer"></div>
 </main>
-<div id="bossHUD"><span>👹 زعيم القش!</span><div id="bossBar"><div id="bossFill"></div></div><span id="bossHp">0 / 0</span></div>
+<div id="bossHUD"><span>👑 حارس القش</span><div id="bossBar"><div id="bossFill"></div></div><span id="bossHp" dir="ltr">0 / 0</span></div>
 <section class="actionBar">
  <button class="action" id="sellBtn"><span class="emoji">💰</span><span>بيع القش <span id="sellText" class="desc">السلة فارغة</span></span></button>
  <button class="action secondary" id="shopBtn"><span class="emoji">🛒</span><span>المتجر<span class="desc">أدوات وتطويرات</span></span></button>
  <button class="action blue" id="galleryBtn"><span class="emoji">🏆</span><span>الألبوم<span class="desc">الإبر والمناطق</span></span></button>
 </section>
-<div class="footer">إصدار المغامرات ✨ • نقر واحد • مناطق وكنوز وزعماء • حفظ تلقائي</div>
+<div class="footer">إصدار حارس القش ✨ • نقر واحد • مناطق وكنوز وزعماء • حفظ تلقائي</div>
 </div>
 <div id="toast" role="status"></div>
 <div class="overlay" id="shopOverlay" aria-hidden="true"><section class="panel"><div class="panelHead"><div><h2>🛒 متجر المزرعة</h2><p>أدوات، آلات، حيوانات ومساعدون حقيقيون</p></div><button class="close" data-close="shopOverlay" aria-label="إغلاق">×</button></div><div class="tabs" id="shopTabs"><button class="tab selected" data-tab="tools">🧤 الأدوات</button><button class="tab" data-tab="upgrades">⚡ التطويرات</button><button class="tab" data-tab="helpers">🐣 المساعدون</button></div><div class="shopItems" id="shopItems"></div></section></div>
@@ -159,13 +159,14 @@ state.helperOwned=(state.helperOwned&&typeof state.helperOwned==='object')?state
 for(const helper of helpers)state.helperOwned[helper.id]=Math.max(0,Math.min(helper.max,Math.floor(Number(state.helperOwned[helper.id])||0)));
 state.album=(state.album&&typeof state.album==='object')?state.album:{};
 state.bossWins=Math.max(0,Math.floor(Number(state.bossWins)||0));
-state.bossHP=Math.max(0,Number(state.bossHP)||0);state.bossMax=Math.max(0,Number(state.bossMax)||0);
+state.bossMax=Math.max(0,Number(state.bossMax)||0);state.bossHP=Math.max(0,Math.min(state.bossMax,Number(state.bossHP)||0));
 if(!Array.isArray(state.milestones))state.milestones=[];
 if(!state.drop||!['chest','gold','bug'].includes(state.drop.type))state.drop=null;
 if(!state.event||!['frenzy','double','magnet'].includes(state.event.id))state.event=null;
 
 let shopTab='tools',width=800,height=480,dpr=1,lastTouch=0,lastPaint=0,noticeTimeout,particles=[],glints=[],wobble=0;
 let needle={x:0,y:0};let pile={x:0,base:0,rx:0,h:0,amount:1};let roundWin=Boolean(state.found);if(state.remaining===0&&isBoss()&&!roundWin&&state.bossMax<=0){state.bossMax=Math.ceil(25+state.level*12+state.total*.14);state.bossHP=state.bossMax;}
+let bossHitUntil=0;
 let audioContext=null;
 let lastFrame=0,animTime=0, lastEventCheck=0,hitFX=null;
 const safeProgress=()=>state.total>0?1-state.remaining/state.total:0;
@@ -187,14 +188,25 @@ function chooseRarity(){const n=(state.level*7919+state.seed*13)>>>0;const rand=
 function beep(f=550,d=.075,type='sine',gain=.05){if(!state.sound)return;try{const A=window.AudioContext||window.webkitAudioContext;if(!A)return;audioContext=audioContext||new A();if(audioContext.state==='suspended')audioContext.resume();let osc=audioContext.createOscillator(),vol=audioContext.createGain();osc.type=type;osc.frequency.setValueAtTime(f,audioContext.currentTime);osc.frequency.exponentialRampToValueAtTime(Math.max(90,f*.7),audioContext.currentTime+d);vol.gain.setValueAtTime(gain,audioContext.currentTime);vol.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+d);osc.connect(vol);vol.connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+d+.005);}catch{}}
 function save(){try{localStorage.setItem(ST_KEY,JSON.stringify(state));}catch{}}
 function fmt(n){return Math.floor(n).toLocaleString('en-US');}
+// Compact visual counters: 999 → 999, 1,234 → 1.2K, 26,126 → 26.1K.
+// Keep original numeric values in game calculations and full-precision tooltips.
+function compact(n){
+  n=Number(n)||0;const sign=n<0?'-':'';let x=Math.abs(Math.floor(n));
+  if(x<1000)return sign+fmt(x);
+  const units=['','K','M','B','T','Qa','Qi'];let unit=0;
+  while(x>=1000&&unit<units.length-1){x/=1000;unit++;}
+  const display=Number(x.toFixed(x<100?1:0));
+  if(display>=1000&&unit<units.length-1)return sign+'1'+units[unit+1];
+  return sign+display+units[unit];
+}
 function cap(){return Math.floor(24*Math.pow(1.85,state.capacityLevel));}
 function power(){return (tools.find(t=>t.id===state.equipped).power+state.powerLevel*2)*multiplier()*(activeEvent()?.id==='magnet'?2:1);}
 function sellRate(){return (1+state.valueLevel*.5)*(activeEvent()?.id==='double'?2:1);}
 function totalFor(level){return Math.round(Math.min(1e10,180*Math.pow(1.42,level-1)));}
 function upgradeCost(kind){return Math.round(({capacity:40,power:90,value:120,helper:300,luck:175})[kind] *Math.pow(({capacity:2.4,power:2.55,value:2.55,helper:3.25,luck:2.4})[kind],state[kind+'Level']));}
-function updateHUD(){const t=tools.find(t=>t.id===state.equipped);const l=currentLocation();$('coins').innerHTML=fmt(state.coins)+' <small>🪙</small>';$('bag').textContent=fmt(state.bag)+' / '+fmt(cap());$('needles').textContent=fmt(state.needles);$('stageName').textContent=l.icon+' '+l.name+' · كومة '+fmt(state.level)+(isBoss()?' 👹':'');const pct=Math.round(100*safeProgress());$('progress').style.width=pct+'%';$('percent').textContent=pct+'%';$('remaining').textContent=state.bossHP>0?'زعيم القش!':state.remaining>0?'باقي '+fmt(state.remaining)+' قشة':'ظهرت الإبرة!';$('toolDisplay').textContent=t.emoji+' '+t.name+' · +'+fmt(power())+' قش/نقرة';$('sellText').textContent=state.bag>0?'تحصل '+fmt(Math.floor(state.bag*sellRate()))+' 🪙':'السلة فارغة';$('sellBtn').disabled=state.bag<=0;$('soundBtn').textContent=state.sound?'🔊':'🔇';$('hint').innerHTML=state.bossHP>0?'👹 <em>اضرب زعيم القش!</em> بالنقر':state.remaining<=0?'✨ <em>ظهرت الإبرة!</em> المسها الآن':state.bag>=cap()?'🧺 <em>السلة ممتلئة!</em> بِع القش':'👆 <em>انقر على كومة القش</em> واكتشف أسرارها!';
-const crew=helpers.filter(h=>state.helperOwned[h.id]>0).map(h=>h.emoji+'×'+state.helperOwned[h.id]);$('crewText').textContent=crew.length?'🧑‍🌾 '+crew.join(' ')+' · '+fmt(helperRate())+'/ث':'🐣 اشترِ مساعداً من المتجر';$('luckText').textContent='🎁 كنوز '+fmt(state.treasures)+' · 👹 زعماء '+fmt(state.bossWins);
-$('bossHUD').classList.toggle('on',state.bossHP>0);$('bossHp').textContent=fmt(Math.ceil(state.bossHP))+' / '+fmt(state.bossMax);$('bossFill').style.width=(state.bossMax?Math.max(0,100*state.bossHP/state.bossMax):0)+'%';
+function updateHUD(){const t=tools.find(t=>t.id===state.equipped);const l=currentLocation();$('coins').textContent=compact(state.coins);$('coins').title=fmt(state.coins)+' عملة';$('bag').textContent=compact(state.bag)+' / '+compact(cap());$('bag').title=fmt(state.bag)+' / '+fmt(cap());$('needles').textContent=compact(state.needles);$('needles').title=fmt(state.needles)+' إبرة';$('stageName').textContent=l.icon+' '+l.name+' · كومة '+compact(state.level)+(isBoss()?' 👹':'');const pct=Math.round(100*safeProgress());const battlePct=state.bossHP>0?Math.round(100*(1-state.bossHP/Math.max(1,state.bossMax))):null;$('progress').style.width=(battlePct??pct)+'%';$('percent').textContent=(battlePct===null?pct:battlePct)+'%';$('remaining').textContent=state.bossHP>0?'حارس القش!':state.remaining>0?'باقي '+compact(state.remaining)+' قشة':'ظهرت الإبرة!';$('toolDisplay').textContent=t.emoji+' '+t.name+' · +'+compact(power())+' قش/نقرة';$('sellText').textContent=state.bag>0?'تحصل '+compact(Math.floor(state.bag*sellRate()))+' 🪙':'السلة فارغة';$('sellBtn').disabled=state.bag<=0;$('soundBtn').textContent=state.sound?'🔊':'🔇';$('hint').innerHTML=state.bossHP>0?'👑 <em>حارس القش!</em> اضرب القلب المتوهّج':state.remaining<=0?'✨ <em>ظهرت الإبرة!</em> المسها الآن':state.bag>=cap()?'🧺 <em>السلة ممتلئة!</em> بِع القش':'👆 <em>انقر على كومة القش</em> واكتشف أسرارها!';
+const crew=helpers.filter(h=>state.helperOwned[h.id]>0).map(h=>h.emoji+'×'+state.helperOwned[h.id]);$('crewText').textContent=crew.length?'🧑‍🌾 '+crew.join(' ')+' · '+compact(helperRate())+'/ث':'🐣 اشترِ مساعداً من المتجر';$('luckText').textContent='🎁 كنوز '+compact(state.treasures)+' · 👹 زعماء '+compact(state.bossWins);
+$('bossHUD').classList.toggle('on',state.bossHP>0);$('bossHp').textContent=compact(Math.ceil(state.bossHP))+' / '+compact(state.bossMax);$('bossHp').title=fmt(Math.ceil(state.bossHP))+' / '+fmt(state.bossMax);$('bossFill').style.width=(state.bossMax?Math.max(0,100*state.bossHP/state.bossMax):0)+'%';
 if(activeEvent()){$('eventBanner').textContent=(state.event.id==='frenzy'?'🔥 حُمّى القش ×5':state.event.id==='double'?'💰 بيع مضاعف':'🧲 قوة مضاعفة')+' · '+Math.ceil((state.event.until-Date.now())/1000)+' ث';$('eventBanner').classList.add('on');}else{$('eventBanner').classList.remove('on');}
 }
 function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(noticeTimeout);noticeTimeout=setTimeout(()=>el.classList.remove('show'),1550);}
@@ -223,7 +235,7 @@ if(particles.length>150)particles.splice(0,particles.length-100);if(!automatic){
 else{for(let i=0;i<Math.min(5,gained);i++)particles.push(makeParticle(pile.x+pile.rx*.6,pile.base-pile.h*.5,'straw'));}
 if(state.remaining===0){state.drop=null;state.event=null;if(isBoss()){state.bossMax=Math.ceil(25+state.level*12+state.total*.14);state.bossHP=state.bossMax;toast('👹 ظهر زعيم القش! انقر عليه!');beep(210,.35,'sawtooth');}else{toast('✨ ظهرت الإبرة! المسها لتلتقطها');beep(1050,.2,'sine');}}
 else milestones();save();updateHUD();return gained;}
-function hitBoss(x,y){if(state.bossHP<=0)return;const damage=Math.max(4,Math.ceil(power()*2));state.bossHP=Math.max(0,state.bossHP-damage);for(let i=0;i<18;i++)particles.push(makeParticle(x,y,'straw'));floatText(x,y,'⚔️ '+fmt(damage),true);wobble=1.7;beep(220+Math.random()*70,.09,'square',.028);if(state.bossHP===0){const prize=Math.round(state.level*120+state.bossMax*3);state.coins+=prize;state.bossWins++;toast('🏆 هزمت زعيم القش! +'+fmt(prize)+' 🪙');for(let i=0;i<80;i++)particles.push(makeParticle(pile.x,pile.base-pile.h*.3,'confetti'));beep(880,.25,'triangle');}save();updateHUD();}
+function hitBoss(x,y){if(state.bossHP<=0)return;const damage=Math.max(4,Math.ceil(power()*2));bossHitUntil=performance.now()+210;state.bossHP=Math.max(0,state.bossHP-damage);for(let i=0;i<18;i++)particles.push(makeParticle(x,y,'straw'));floatText(x,y,'⚔️ '+fmt(damage),true);wobble=1.7;beep(220+Math.random()*70,.09,'square',.028);if(state.bossHP===0){const prize=Math.round(state.level*120+state.bossMax*3);state.coins+=prize;state.bossWins++;toast('🏆 هزمت زعيم القش! +'+fmt(prize)+' 🪙');for(let i=0;i<80;i++)particles.push(makeParticle(pile.x,pile.base-pile.h*.3,'confetti'));beep(880,.25,'triangle');}save();updateHUD();}
 function win(){if(roundWin||state.remaining>0||state.bossHP>0)return;roundWin=true;const rarity=chooseRarity();const prize=Math.floor(130*Math.pow(state.level,1.35))+rarity.bonus;state.coins+=prize;state.needles++;state.album[rarity.id]=(state.album[rarity.id]||0)+1;state.found=true;state.drop=null;state.event=null;for(let i=0;i<95;i++)particles.push(makeParticle(pile.x+(Math.random()-.5)*pile.rx*.6,pile.base-pile.h*.55,'confetti'));
 $('winIcon').textContent=rarity.icon+'✨';$('winTitle').textContent='حصلت على '+rarity.name+'!';$('winMessage').textContent='أكملت كومة '+fmt(state.level)+' في '+currentLocation().name+'! '+(isBoss()?'وهزمت زعيم القش أيضاً! ':'')+'أضفنا الإبرة إلى ألبومك.';$('winReward').textContent='🎁 مكافأة +'+fmt(prize)+' 🪙';save();updateHUD();beep(800,.15,'triangle');setTimeout(()=>beep(1030,.19,'triangle'),145);setTimeout(()=>show('winOverlay'),380);}
 function nextRound(){state.level++;state.total=totalFor(state.level);state.remaining=state.total;state.found=false;state.drop=null;state.event=null;state.bossHP=0;state.bossMax=0;state.milestones=[];roundWin=false;state.seed=state.level*9187+1741;save();updateHUD();hide('winOverlay');makeTextures();particles.length=0;toast(currentLocation().icon+' دخلت '+currentLocation().name+'!');}
@@ -315,8 +327,103 @@ ctx.save();ctx.translate(x,y-50+Math.sin(t*.004)*4);roundRect(-64,-21,128,27,12,
 for(let i=0;i<4;i++){const a=t*.001*(i%2?1:-1)+i*Math.PI/2,xx=x+Math.cos(a)*(33+3*i),yy=y-8+Math.sin(a)*19;line(xx-4,yy,xx+4,yy,'#fffbd0',2);line(xx,yy-4,xx,yy+4,'#fffbd0',2);}
 }
 function makeParticle(x,y,kind){let a=kind==='confetti'?Math.random()*Math.PI*2:(-Math.PI*.93+Math.random()*Math.PI*.86),speed=kind==='confetti'?1+Math.random()*5:2+Math.random()*4;return{x,y,vx:Math.cos(a)*speed,vy:Math.sin(a)*speed-1,life:kind==='confetti'?65+Math.random()*55:20+Math.random()*20,max:120,rot:Math.random()*Math.PI,dr:Math.random()*.15-.075,kind,color:kind==='confetti'?['#f8d45a','#fff9d9','#ff756f','#91d9e3','#a7df70'][Math.random()*5|0]:['#ffe3a2','#f6bf5c','#b67e2b','#ffdb74'][Math.random()*4|0]};}
-function drawBoss(t){const x=pile.x,y=pile.base-height*.20+Math.sin(t*.003)*4,s=Math.max(.75,Math.min(1.5,width/400));ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-ctx.fillStyle='#725027';ctx.beginPath();ctx.ellipse(0,0,79,72,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#e3a946';ctx.beginPath();ctx.moveTo(-70,18);ctx.quadraticCurveTo(-97,-56,-21,-65);ctx.quadraticCurveTo(31,-101,77,-33);ctx.quadraticCurveTo(99,31,0,72);ctx.closePath();ctx.fill();ctx.strokeStyle='#f5d177';ctx.lineWidth=2.5;for(let i=0;i<26;i++){let a=i*2.399,r=20+(i*17%45),xx=Math.cos(a)*r,yy=Math.sin(a)*r;line(xx-10,yy+6,xx+12,yy-4,i%2?'#ffe19a':'#bb7b31',2.8);}line(-63,-2,-106,-28,'#9f6a2e',12);line(68,-2,112,-21,'#9f6a2e',12);circle(-25,-6,18,'#fff9db');circle(25,-6,18,'#fff9db');circle(-21,-5,8,'#47352c');circle(22,-5,8,'#47352c');line(-41,-32,-13,-25,'#754827',7);line(10,-26,40,-35,'#754827',7);ctx.strokeStyle='#643c27';ctx.lineWidth=6;ctx.beginPath();ctx.arc(0,24,19,.10,Math.PI-.10);ctx.stroke();ctx.fillStyle='#f8dfb6';roundRect(-55,74,110,28,13,'#fff5cd');ctx.fillStyle='#70462b';ctx.textAlign='center';ctx.font='bold 16px system-ui';ctx.textBaseline='middle';ctx.fillText('اضربني! 👹',0,89);ctx.restore();}
+function drawBoss(t){
+  // Original hand-drawn straw guardian: thorned shoulders, stitched bark mask,
+  // glowing vulnerable heart, heavy straw gauntlets and layered silhouette.
+  const x=pile.x,y=pile.base-height*.20+Math.sin(t*.003)*4;
+  const s=Math.max(.68,Math.min(1.18,width/430));
+  const hit=Math.max(0,(bossHitUntil-performance.now())/210);
+  const sway=Math.sin(t*.0024)*.045;
+  const heart=1+Math.sin(t*.006)*.10;
+  ctx.save();
+  ctx.translate(x,y); ctx.scale(s,s);
+  if(hit>0)ctx.translate(Math.sin(t*.11)*7*hit,0);
+  ctx.rotate(sway + hit*.05);
+  const poly=(a,color,stroke='',lw=2)=>{ctx.beginPath();ctx.moveTo(a[0],a[1]);for(let i=2;i<a.length;i+=2)ctx.lineTo(a[i],a[i+1]);ctx.closePath();ctx.fillStyle=color;ctx.fill();if(stroke){ctx.lineJoin='round';ctx.strokeStyle=stroke;ctx.lineWidth=lw;ctx.stroke();}};
+  const beam=(ax,ay,bx,by,w,c,edge)=>{ctx.strokeStyle=edge;ctx.lineWidth=w+5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();ctx.strokeStyle=c;ctx.lineWidth=w;ctx.stroke();};
+  // Floating debris / smoky magic behind the guardian.
+  let aura=ctx.createRadialGradient(0,-25,15,0,-25,160);
+  aura.addColorStop(0,`rgba(254,178,58,${.23+Math.sin(t*.005)*.06})`);
+  aura.addColorStop(.57,'rgba(202,103,29,.13)');aura.addColorStop(1,'rgba(169,73,17,0)');
+  circle(0,-25,160,aura);
+  ctx.save();ctx.globalAlpha=.55;
+  for(let i=0;i<8;i++){const a=i*2.4+t*.0008,rx=Math.sin(a)*(114+i%2*21),ry=Math.cos(a)*70-23;
+    ctx.save();ctx.translate(rx,ry);ctx.rotate(a);roundRect(-6,-1.4,12,2.8,1,i%2?'#ffe39a':'#ae6f35');ctx.restore();}
+  ctx.restore();
+  // Planted feet and dark wooden joints.
+  circle(0,112,82,'rgba(76,57,26,.18)');
+  poly([-63,65,-18,67,-10,111,-31,126,-69,114,-82,102],'#765333','#4b3428',4);
+  poly([22,64,65,65,82,102,74,116,27,124,11,106],'#765333','#4b3428',4);
+  poly([-73,108,-42,100,-18,109,-15,125,-79,125],'#403c34','#241f22',3);
+  poly([20,108,53,101,82,111,84,125,16,125],'#403c34','#241f22',3);
+  // Rough jagged hay outline, distinctly monster-shaped rather than circular.
+  const thornL=[-69,-38,-115,-73,-83,-77,-121,-122,-64,-103,-58,-148,-30,-112,-11,-154,7,-108,43,-143,55,-93,96,-110,75,-56,110,-18,77,27,94,64,59,95,3,109,-58,90,-95,51];
+  poly(thornL,'#a87432','#704c2c',5);
+  poly([-82,-43,-55,-89,-20,-100,5,-110,49,-92,81,-47,83,52,52,92,2,108,-56,91,-88,44], '#e9b65b','#78502b',6);
+  poly([-63,-54,-27,-86,22,-89,61,-58,66,41,32,77,-9,90,-58,64,-68,13],'#f5c66b');
+  // Rope belt across the chest and patched armor panels.
+  poly([-77,42,-34,54,32,50,72,38,67,55,18,73,-42,71,-78,59],'#9b6330','#74482b',3);
+  line(-57,57,59,54,'#ffdfa1',4);
+  for(let i=-4;i<=4;i++)line(i*16-3,54,i*16+5,70,'#6f482c',2);
+  // Jointed arms swinging slightly.
+  const armWave=Math.sin(t*.0035)*6;
+  beam(-63,-36,-119,-4+armWave,22,'#a16a34','#64412a');
+  beam(66,-34,122,-4-armWave,22,'#a16a34','#64412a');
+  // Pointed hay fists with claws: a visible enemy silhouette.
+  poly([-122,-21+armWave,-153,-34+armWave,-143,-3+armWave,-165,11+armWave,-130,24+armWave,-108,8+armWave], '#e2ab4f','#78512c',4);
+  poly([123,-21-armWave,152,-39-armWave,143,-4-armWave,163,10-armWave,130,25-armWave,107,8-armWave], '#e2ab4f','#78512c',4);
+  line(-145,0+armWave,-161,12+armWave,'#f8e39a',5);line(146,-2-armWave,162,10-armWave,'#f8e39a',5);
+  // Crown of straw prongs and twisted vine horns.
+  poly([-59,-76,-85,-135,-44,-119,-25,-151,-9,-124,18,-160,34,-122,72,-141,54,-86,25,-70], '#eabd63','#83562e',5);
+  poly([-77,-117,-100,-149,-90,-116,-63,-96],'#725032','#503528',3);
+  poly([54,-110,89,-155,78,-112,61,-96],'#725032','#503528',3);
+  for(let i=0;i<15;i++){
+    const j=i-7;const px=j*7;let py=-90-Math.sin(i*2.1)*18;
+    line(px,py,px+(i%2?11:-12),py-17-(i%3)*6,i%3?'#ffdf8b':'#bd792f',2.3);
+  }
+  // Face is a dark, angular scarecrow mask with stitches (not a smiley).
+  poly([-46,-91,-15,-107,27,-106,54,-87,52,-39,23,-21,-33,-29,-53,-53], '#4b3931','#2d2a29',5);
+  poly([-40,-88,-10,-101,35,-96,45,-75,9,-80,-34,-70],'#665044');
+  for(let i=0;i<4;i++){line(-48,-46+i*5,-38,-40+i*5,'#dfb87e',2);line(41,-53+i*5,49,-57+i*5,'#dcb375',2);}
+  // Angled fiery amber eyes, under sharp lowered brows.
+  ctx.shadowColor='#ff8c26';ctx.shadowBlur=14;
+  poly([-38,-69,-27,-80,-7,-72,-13,-61,-29,-59],'#ffce53');
+  poly([11,-72,29,-82,40,-73,31,-59,14,-62],'#ffce53');
+  ctx.shadowBlur=0;
+  poly([-30,-70,-17,-72,-15,-64,-28,-63],'#b84528');
+  poly([17,-70,30,-73,31,-63,18,-63],'#b84528');
+  line(-41,-87,-5,-77,'#2e2c2a',8);line(5,-78,42,-87,'#2e2c2a',8);
+  // Zigzag grimace under the eyes.
+  poly([-28,-40,-12,-35,4,-42,16,-33,33,-44,23,-26,-4,-23,-25,-29], '#241e20','#9f6d42',2);
+  poly([-19,-37,-11,-35,-14,-28],'#f9e6b5');poly([4,-39,11,-35,5,-27],'#f9e6b5');poly([20,-37,27,-40,23,-28],'#f9e6b5');
+  // Beating target crystal: easier to recognise where to tap.
+  ctx.save();ctx.translate(0,19);ctx.scale(heart,heart);
+  ctx.shadowColor='#ff9329';ctx.shadowBlur=17;
+  poly([0,-25,26,-5,18,22,0,34,-20,18,-27,-4], '#ffac35','#a44929',4);
+  ctx.shadowBlur=0;
+  poly([-8,-8,1,-20,17,-3,3,3,1,21,-10,5],'#fff1a6');
+  line(0,-17,0,15,'#ffeabe',2.5);
+  ctx.restore();
+  // Short contrasting tufts give the body a real straw texture.
+  ctx.save();ctx.globalAlpha=.85;
+  for(let i=0;i<32;i++){
+    const a=i*2.399;const xx=Math.sin(a)*60,yy=((i*37)%136)-53;
+    if(yy< -32 && Math.abs(xx)<50)continue;
+    if(Math.abs(xx)>77)continue;
+    line(xx,yy,xx+(i%2?15:-13),yy-(i%3)*4-5,i%3?'#cc8837':'#ffe6a0',1.8);
+  }
+  ctx.restore();
+  // Hit flash (only briefly on damage), staying entirely local to the boss.
+  if(hit>0){ctx.save();ctx.globalAlpha=hit*.4;poly([-91,-44,-54,-102,21,-126,79,-89,98,42,54,91,-47,89,-91,31],'#fff8ce');ctx.restore();}
+  // Dark plaque replaces the old cheerful "hit me" face label.
+  ctx.save();ctx.translate(0,145);
+  roundRect(-88,-14,176,29,13,'#49332d');
+  ctx.strokeStyle='#e8bf65';ctx.lineWidth=2;ctx.strokeRect(-85,-11,170,23);
+  ctx.font='bold 13px system-ui';ctx.fillStyle='#fff0bd';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('⚔️ اضرب القلب المتوهّج',0,1);
+  ctx.restore();
+  ctx.restore();
+}
 function drawDrop(t){const d=state.drop;if(!d||d.until<=Date.now())return;const p=dropPosition(),r=25+Math.sin(t*.006)*3;
 ctx.save();ctx.translate(p.x,p.y);ctx.shadowColor='#fff3a2';ctx.shadowBlur=20;circle(0,0,r,'#fff4d4');ctx.shadowBlur=0;circle(0,0,r-3,'#efbf66');ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='bold 33px system-ui';ctx.fillText(d.type==='chest'?'🎁':d.type==='gold'?'🌟':'🐞',0,0);ctx.fillStyle='#fff9ee';roundRect(-37,-46,74,17,7,'#fff6dd');ctx.fillStyle='#866034';ctx.font='bold 10px system-ui';ctx.fillText('اضغط! '+Math.ceil((d.until-Date.now())/1000)+'ث',0,-37);ctx.restore();}
 function drawForeground(t){const k=currentLocation().type;if(k==='desert'){drawPalm(width*.035,height*.92,.53,t);drawPalm(width*.95,height*.91,.48,t);}else if(k==='autumn'){bareTree(width*.01,height*.96,.43,'#d6783c');bareTree(width*.99,height*.92,.45,'#c15b30');}else if(k==='snow'){fir(width*.025,height*.93,.55);fir(width*.96,height*.94,.5);ctx.fillStyle='#ffffffa9';for(let i=0;i<19;i++){const x=(i*97.72)%width,y=(i*79.31+t*.017*(i%3+1))%(height*.85);circle(x,y,1.5+(i%3),'#fffdf2');}}else if(k==='magic'){mushroom(width*.055,height*.94,.83,'#9b79f6');mushroom(width*.95,height*.94,.7,'#eb8ccf');}else if(k==='candy'){lolli(width*.03,height*.94,.69);lolli(width*.94,height*.95,.67);}}
