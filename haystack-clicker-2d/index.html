@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f8ecce">
-<title>إبرة وسط القش | حارس القش</title>
+<title>إبرة وسط القش | خزنة ألف إبرة</title>
 <style>
 :root{--ink:#283b37;--muted:#738178;--gold:#efa93d;--darkgold:#cb7a22;--cream:#fff9ec;--outline:#8c6336;--grass:#4d925c;--paper:#fffdf6}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -21,7 +21,7 @@ button:active{transform:translateY(2px) scale(.988)}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.stat{display:flex;align-items:center;gap:11px;padding:10px 13px;border:1.5px solid #e9d3a3;background:linear-gradient(#fffef7,#fffaee);border-radius:16px;box-shadow:0 4px 0 rgba(179,130,61,.12);min-width:0}
 .statIcon{flex-shrink:0;display:grid;place-items:center;background:#ffedc4;border-radius:12px;width:43px;height:43px;font-size:23px}
 .stat:nth-child(2) .statIcon{background:#e4f4d7}.stat:nth-child(3) .statIcon{background:#e4f2f8}
-.statLabel{font-size:12px;color:#89785c;display:block;font-weight:750}.statNum{font-weight:950;font-size:clamp(16px,2.5vw,23px);line-height:1.4;display:block;white-space:nowrap;font-variant-numeric:tabular-nums}#bag{direction:ltr;unicode-bidi:embed;text-align:right}
+.statLabel{font-size:12px;color:#89785c;display:block;font-weight:750}.statNum{font-weight:950;font-size:clamp(16px,2.5vw,23px);line-height:1.4;display:block;white-space:nowrap;font-variant-numeric:tabular-nums}.statContent{min-width:0;flex:1;display:flex;flex-direction:column;align-items:flex-start;overflow:hidden}.statContent .statNum{max-width:100%;overflow:hidden;text-overflow:ellipsis;direction:ltr;text-align:left}.bagAmount{display:block;max-width:100%;font-size:clamp(17px,2.6vw,24px);line-height:1.1;font-weight:1000;white-space:nowrap;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}.bagCapacity{display:block;color:#917b54;font-size:11px;font-weight:800;white-space:nowrap;direction:rtl;text-align:right;max-width:100%;overflow:hidden;text-overflow:ellipsis}.bagTrack{width:100%;height:4px;margin-top:4px;background:#d5e8c6;border-radius:30px;overflow:hidden}.bagFill{height:100%;width:0;background:linear-gradient(90deg,#6aaa6a,#398058);transition:width .2s}
 .statNum small{font-size:12px;font-weight:800;color:#917b54}
 .stageInfo{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 4px;font-size:13px;font-weight:750;color:#7f704f}
 .stageName{white-space:nowrap}.progressBox{height:13px;background:#e8d9af;border-radius:30px;overflow:hidden;border:1px solid #d6bd87;flex:1;box-shadow:inset 0 2px 3px #c5a77350}.progress{height:100%;width:0%;background:linear-gradient(90deg,#f3c859,#e7a12e);border-radius:20px;transition:width .35s ease;box-shadow:inset 0 2px 0 #ffe29a}
@@ -52,7 +52,7 @@ button:active{transform:translateY(2px) scale(.988)}
 .shopItem{display:flex;gap:11px;padding:11px;background:#fffdf7;border:1.5px solid #ebdab9;border-radius:15px;align-items:flex-start;min-width:0}.shopIcon{flex-shrink:0;display:grid;place-items:center;width:48px;height:50px;border-radius:12px;background:#fff0d1;font-size:27px}.itemMain{flex:1;min-width:0}.itemMain h3{margin:1px 0 4px;font-size:14px}.itemMain p{margin:0 0 8px;font-size:11px;color:#8d7b5d;line-height:1.6;min-height:30px}.buy{padding:8px 13px;border-radius:9px;background:#e4af48;color:#543b1b;font-weight:950;font-size:12px;min-width:96px}.buy.owned{background:#d9eed7;color:#2a6740}.buy:disabled{background:#ebe3d5;color:#aa9e8d;cursor:not-allowed}
 .welcome,.victory,.helpBody{padding:20px;text-align:center;overflow:auto}.trophy{font-size:68px;line-height:1.1;filter:drop-shadow(0 8px 4px #c8983840)}.victory h2{font-size:30px;margin:12px 0 2px}.victory p,.helpBody p{line-height:1.85;color:#796c53;font-size:15px}.victoryReward{font-size:25px;font-weight:1000;color:#a66d20;margin:10px auto 15px}.bigBtn{background:linear-gradient(#ffe191,#edaf48);border:2px solid #bc8435;border-radius:14px;padding:15px 28px;box-shadow:0 5px 0 #c28d40;font-size:17px;font-weight:1000}.helpGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:right;margin-bottom:18px}.helpTip{background:#fffdf6;padding:13px;border-radius:12px;border:1px solid #eddcb7;line-height:1.7;font-size:13px;color:#655637;font-weight:700}
 @media(min-width:900px){#app{height:100svh;min-height:680px;max-height:1000px}.stats{max-width:100%}}
-@media(max-width:650px){#app{height:100svh;gap:8px;padding:8px 9px max(10px,env(safe-area-inset-bottom))}.top{min-height:51px}.brandMark{width:40px;height:40px;border-radius:12px;font-size:22px}.brand h1{font-size:19px}.brand p{font-size:10px}.topBtn{min-width:38px;height:39px;font-size:18px}.stats{gap:5px}.stat{padding:8px 7px;gap:5px;border-radius:12px}.statIcon{width:32px;height:34px;border-radius:9px;font-size:18px}.statLabel{font-size:10px}.statNum{font-size:16px}.statNum small{font-size:10px}.stageInfo{font-size:11px;gap:8px}.stageName{max-width:44%;overflow:hidden;text-overflow:ellipsis}#stage{min-height:270px;border-radius:18px;border-width:2px}.scenePill{font-size:11px;top:10px;padding:7px 11px}.toolPill,.littlePill{font-size:10px;padding:6px 7px}.actionBar{gap:6px;grid-template-columns:1.14fr 1fr 1fr}.action{height:61px;gap:5px;font-size:13px;border-radius:13px}.action .emoji{font-size:21px}.action .desc{font-size:10px}.footer{font-size:9px}.shopItems{grid-template-columns:1fr;padding:8px 12px 18px}.panelHead h2{font-size:22px}.panel{max-height:87svh}.tabs{padding:9px 10px 5px}.tab{font-size:12px}.helpGrid{grid-template-columns:1fr}}
+@media(max-width:650px){#app{height:100svh;gap:8px;padding:8px 9px max(10px,env(safe-area-inset-bottom))}.top{min-height:51px}.brandMark{width:40px;height:40px;border-radius:12px;font-size:22px}.brand h1{font-size:19px}.brand p{font-size:10px}.topBtn{min-width:38px;height:39px;font-size:18px}.stats{gap:5px}.stat{padding:8px 6px;gap:4px;border-radius:12px}.bagAmount{font-size:clamp(14px,4vw,19px)}.bagCapacity{font-size:9px}.statContent .statNum{font-size:clamp(14px,3.8vw,18px)}.statIcon{width:32px;height:34px;border-radius:9px;font-size:18px}.statLabel{font-size:10px}.statNum{font-size:16px}.statNum small{font-size:10px}.stageInfo{font-size:11px;gap:8px}.stageName{max-width:44%;overflow:hidden;text-overflow:ellipsis}#stage{min-height:270px;border-radius:18px;border-width:2px}.scenePill{font-size:11px;top:10px;padding:7px 11px}.toolPill,.littlePill{font-size:10px;padding:6px 7px}.actionBar{gap:6px;grid-template-columns:1.14fr 1fr 1fr}.action{height:61px;gap:5px;font-size:13px;border-radius:13px}.action .emoji{font-size:21px}.action .desc{font-size:10px}.footer{font-size:9px}.shopItems{grid-template-columns:1fr;padding:8px 12px 18px}.panelHead h2{font-size:22px}.panel{max-height:87svh}.tabs{padding:9px 10px 5px}.tab{font-size:12px}.helpGrid{grid-template-columns:1fr}}
 @media(max-height:690px){.footer{display:none}.brand p{display:none}#app{gap:6px}.stats .stat{padding-top:5px;padding-bottom:5px}.stageInfo{font-size:11px}.action{height:52px}#stage{min-height:220px}.scenePill{top:8px}.top{min-height:43px}}
 
 /* Version 2 – interactive game additions */
@@ -71,6 +71,39 @@ button:active{transform:translateY(2px) scale(.988)}
 .tagline{color:#907046!important;font-size:12px!important}
 @media(max-width:650px){#crewStrip{font-size:10px;padding:5px 9px;min-height:28px}#eventBanner{top:42px;font-size:10px;padding:5px 9px}.albumGrid{gap:5px}.albumCell{padding:9px 2px;min-height:100px}.regionGrid{grid-template-columns:1fr 1fr}}
 @media(max-height:700px){#crewStrip{min-height:23px;font-size:10px;padding:3px 8px}}
+
+/* Vault v4: tangible door, shelf slots, and mobile-first paging. */
+.vaultPanel{max-width:790px;max-height:92svh;background:linear-gradient(160deg,#ffefd0,#f7e3bb)}
+.vaultBody{overflow-y:auto;overscroll-behavior:contain;padding:12px 14px 22px;text-align:center}
+.vaultShowcase{position:relative;min-height:155px;border:7px solid #9b7548;border-radius:20px;background:repeating-linear-gradient(90deg,#273f40,#273f40 19px,#314a4c 20px,#314a4c 39px);box-shadow:inset 0 0 0 3px #d7bb7f,0 6px 0 #765338;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 12px;margin:0 auto 14px;overflow:hidden;color:#fff2bf}
+.vaultShowcase:before{content:'';position:absolute;inset:13px;border:2px solid #c6a46980;border-radius:13px;pointer-events:none}
+.vaultDoor{height:128px;width:114px;position:relative;flex-shrink:0;border:6px solid #e7c878;border-radius:15px;background:linear-gradient(125deg,#8aa2a2,#435f63 48%,#2b454c 52%,#759395);box-shadow:inset 0 0 0 3px #263a41,6px 5px 0 #11252a8a;transform:perspective(400px) rotateY(-16deg)}
+.vaultDoor:before,.vaultDoor:after{content:'';position:absolute;width:9px;height:16px;background:#ffdc88;border:2px solid #755122;border-radius:4px;right:-12px;top:20px}.vaultDoor:after{top:auto;bottom:19px}
+.vaultWheel{position:absolute;left:50%;top:50%;width:67px;height:67px;transform:translate(-50%,-50%);border:9px double #e6c873;border-radius:50%;background:radial-gradient(circle,#ead9ad 0 12px,#829c9d 13px 19px,#283c47 20px 32px);box-shadow:0 0 0 4px #20343d,0 3px 7px #1d2e30;display:grid;place-items:center;color:#fff0ba;font-size:21px}
+.vaultWheel:before,.vaultWheel:after{content:'';width:6px;height:45px;position:absolute;background:#ecdbad;border-radius:5px;transform:rotate(45deg)}.vaultWheel:after{transform:rotate(-45deg)}
+.vaultWheel span{z-index:1;background:#ffe4a3;border:2px solid #574b36;width:18px;height:18px;border-radius:50%;display:block}
+.vaultSign{z-index:1;text-align:right;min-width:0}.vaultSign strong{display:block;font-size:clamp(16px,4vw,23px)}.vaultSign p{font-size:12px;color:#d5e7d6;margin:6px 0;line-height:1.65}.vaultSign .vaultCount{display:inline-block;background:#e3c46d;color:#263f44;border-radius:40px;padding:5px 10px;font-weight:950;font-size:14px;font-variant-numeric:tabular-nums;direction:ltr}
+.vaultControls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 1px 13px}
+.vaultControls input,.vaultControls select{font:inherit;font-size:12px;padding:9px 10px;border:1.5px solid #c5a270;border-radius:10px;background:#fffcf1;color:#334c49;min-width:0}
+.vaultControls input{width:95px;direction:ltr}.vaultControls select{flex:1;max-width:215px}
+.vaultShelf{padding:9px 6px 15px;background:linear-gradient(90deg,#3f4f50,#52656a 50%,#3f4f50);border:5px solid #c3a26f;border-radius:17px;box-shadow:inset 0 0 0 2px #28383c,0 5px 0 #896c46;position:relative}
+.vaultGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;padding:6px 6px}
+.vaultSlot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;min-height:128px;border:2px solid #ba9e68;border-radius:12px;background:radial-gradient(ellipse at 50% 18%,#f7ebc8,#e3d2a3 78%);box-shadow:inset 0 3px 8px #66503350,0 4px 0 #1e3034;padding:5px 2px;overflow:hidden}
+.vaultSlot.owned{background:radial-gradient(ellipse at 50% 20%,#fff8d6,#f0dda2 78%);border-color:#ffe397}
+.vaultSlot.locked{background:radial-gradient(ellipse at 50% 20%,#687375,#364c53 85%);border-color:#849393}
+.vaultSlot svg{width:100%;height:74px;max-width:67px;display:block;filter:drop-shadow(0 2px 2px #10242950)}
+.vaultSlot.locked svg{opacity:.24;filter:grayscale(1)}
+.vaultSlot .slotId{font-size:10px;font-weight:1000;color:#704d2d;direction:ltr;font-variant-numeric:tabular-nums}
+.vaultSlot.locked .slotId{color:#d2dad0}
+.vaultSlot .slotStatus{font-size:9px;font-weight:900;color:#93621e;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vaultSlot.locked .slotStatus{color:#dee6e2}
+.vaultPages{display:flex;gap:10px;align-items:center;justify-content:center;padding:14px 0 6px;font-size:13px;font-weight:900}
+.vaultPages button{background:#e5be78;border:1px solid #b78a46;padding:10px 15px;border-radius:10px;font-weight:950;min-width:76px}.vaultPages button:disabled{opacity:.34}
+.vaultRegion{margin:17px 0 0;text-align:right}.vaultRegion h3{font-size:15px}
+.needlePanel{max-width:380px}.needleDetail{text-align:center;padding:17px;overflow-y:auto}.needleDetail svg{height:205px;width:153px;filter:drop-shadow(0 8px 7px #8a653c40);display:block;margin:0 auto 8px}.needleDetail strong{display:block;font-size:19px}.needleDetail p{font-size:13px;color:#806b49;line-height:1.9}.needleBadge{display:inline-block;padding:5px 13px;border-radius:60px;background:#e5c57b;color:#654b21;font-weight:900;font-size:12px}
+.trophy .needleArt{width:85px;height:118px;display:inline-block;vertical-align:middle}.vaultWinBtn{display:block;margin:0 auto 14px;background:linear-gradient(#b1e0ce,#69b3a2);border-color:#428873;box-shadow:0 4px 0 #4d9181}
+@media(max-width:650px){.vaultBody{padding:9px 8px 17px}.vaultShowcase{min-height:130px;border-width:5px;gap:9px;padding:8px}.vaultDoor{width:90px;height:108px;border-width:5px}.vaultWheel{width:54px;height:54px;border-width:7px}.vaultSign p{font-size:10px}.vaultSign strong{font-size:16px}.vaultGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:5px 3px}.vaultSlot{min-height:115px}.vaultSlot svg{height:67px}.vaultPages button{padding:9px 10px;min-width:70px}}
+@media(max-width:375px){.statIcon{width:26px;height:30px;font-size:16px}.stat{gap:3px;padding:6px 4px}.statLabel{font-size:9px}.bagAmount{font-size:14px}.statContent .statNum{font-size:14px}.vaultGrid{gap:4px}.vaultSlot{min-height:105px}.vaultSlot svg{height:59px}}
 </style>
 </head>
 <body>
@@ -80,9 +113,9 @@ button:active{transform:translateY(2px) scale(.988)}
  <div class="topActions"><button class="topBtn" id="soundBtn" title="تشغيل / إيقاف الصوت">🔊</button><button class="topBtn" id="helpBtn" title="طريقة اللعب">❔</button></div>
 </header>
 <section class="stats">
- <div class="stat"><div class="statIcon">🪙</div><div><span class="statLabel">العملات</span><span id="coins" class="statNum" dir="ltr">0</span></div></div>
- <div class="stat"><div class="statIcon">🧺</div><div><span class="statLabel">سلة القش</span><span id="bag" class="statNum">0/20</span></div></div>
- <div class="stat"><div class="statIcon">✨</div><div><span class="statLabel">الإبر المكتشفة</span><span id="needles" class="statNum">0</span></div></div>
+ <div class="stat"><div class="statIcon">🪙</div><div class="statContent"><span class="statLabel">العملات</span><span id="coins" class="statNum" dir="ltr">0</span></div></div>
+ <div class="stat"><div class="statIcon">🧺</div><div class="statContent"><span class="statLabel">سلة القش</span><span id="bag" class="bagAmount" dir="ltr">0</span><span id="bagLimit" class="bagCapacity">السعة: 24</span><div class="bagTrack"><div id="bagFill" class="bagFill"></div></div></div></div>
+ <div class="stat"><div class="statIcon">🪡</div><div class="statContent"><span class="statLabel">إبر الخزنة</span><span id="needles" class="statNum" dir="ltr">0/1K</span></div></div>
 </section>
 <div id="crewStrip"><span id="crewText">🐣 المساعدون: لا يوجد</span><span id="luckText">✨ اكتشف الأسرار في القش</span></div>
 <div class="stageInfo"><span class="stageName" id="stageName">🌻 الحقل الذهبي · كومة 1</span><div class="progressBox"><div class="progress" id="progress"></div></div><span id="percent">0%</span></div>
@@ -96,15 +129,15 @@ button:active{transform:translateY(2px) scale(.988)}
 <section class="actionBar">
  <button class="action" id="sellBtn"><span class="emoji">💰</span><span>بيع القش <span id="sellText" class="desc">السلة فارغة</span></span></button>
  <button class="action secondary" id="shopBtn"><span class="emoji">🛒</span><span>المتجر<span class="desc">أدوات وتطويرات</span></span></button>
- <button class="action blue" id="galleryBtn"><span class="emoji">🏆</span><span>الألبوم<span class="desc">الإبر والمناطق</span></span></button>
+ <button class="action blue" id="galleryBtn"><span class="emoji">🗝️</span><span>خزنة الإبر<span class="desc">1,000 إبرة مختلفة</span></span></button>
 </section>
-<div class="footer">إصدار حارس القش ✨ • نقر واحد • مناطق وكنوز وزعماء • حفظ تلقائي</div>
+<div class="footer">إصدار خزنة الإبر 🗝️ • 1,000 إبرة مرسومة • مناطق وكنوز وزعماء • حفظ تلقائي</div>
 </div>
 <div id="toast" role="status"></div>
 <div class="overlay" id="shopOverlay" aria-hidden="true"><section class="panel"><div class="panelHead"><div><h2>🛒 متجر المزرعة</h2><p>أدوات، آلات، حيوانات ومساعدون حقيقيون</p></div><button class="close" data-close="shopOverlay" aria-label="إغلاق">×</button></div><div class="tabs" id="shopTabs"><button class="tab selected" data-tab="tools">🧤 الأدوات</button><button class="tab" data-tab="upgrades">⚡ التطويرات</button><button class="tab" data-tab="helpers">🐣 المساعدون</button></div><div class="shopItems" id="shopItems"></div></section></div>
-<div class="overlay" id="helpOverlay" aria-hidden="true"><section class="panel"><div class="panelHead"><h2>🌾 كيف تلعب؟</h2><button class="close" data-close="helpOverlay" aria-label="إغلاق">×</button></div><div class="helpBody"><div class="helpGrid"><div class="helpTip">👆 <b>انقر على الكومة</b> لجمع القش وراقب الكنوز تظهر. اضغط على الصندوق قبل اختفائه!</div><div class="helpTip">🧺 <b>إذا امتلأت السلة</b> اضغط «بيع القش» للحصول على عملات.</div><div class="helpTip">🛒 <b>اشترِ أدوات ومساعدين</b>، اجمع إبر الحديد والذهب والماس، وانظر الألبوم.</div><div class="helpTip">🗺️ <b>مناطق مختلفة كل كومة</b> وزعيم 👹 كل 5 أكوام. اكشف الإبرة ثم المسها!</div></div><button class="bigBtn" data-close="helpOverlay">فهمت، خلني ألعب! 🎮</button></div></section></div>
-<div class="overlay" id="galleryOverlay" aria-hidden="true"><section class="panel"><div class="panelHead"><h2>🏆 ألبوم المغامرات</h2><button class="close" data-close="galleryOverlay" aria-label="إغلاق">×</button></div><div class="helpBody" id="galleryBody"></div></section></div>
-<div class="overlay" id="winOverlay" aria-hidden="true"><section class="panel"><div class="victory"><div class="trophy" id="winIcon">🪡✨</div><h2 id="winTitle">لقيت الإبرة!</h2><p id="winMessage">مبروك! لقيت الإبرة بين القش.</p><div class="victoryReward" id="winReward">+150 🪙</div><button class="bigBtn" id="nextBtn">🌾 افتح كومة جديدة</button></div></section></div>
+<div class="overlay" id="helpOverlay" aria-hidden="true"><section class="panel"><div class="panelHead"><h2>🌾 كيف تلعب؟</h2><button class="close" data-close="helpOverlay" aria-label="إغلاق">×</button></div><div class="helpBody"><div class="helpGrid"><div class="helpTip">👆 <b>انقر على الكومة</b> لجمع القش وراقب الكنوز تظهر. اضغط على الصندوق قبل اختفائه!</div><div class="helpTip">🧺 <b>إذا امتلأت السلة</b> اضغط «بيع القش» للحصول على عملات.</div><div class="helpTip">🛒 <b>اشترِ أدوات ومساعدين</b>، اجمع إبر الحديد والذهب والماس، وافتح خزنة الإبر الفريدة.</div><div class="helpTip">🗺️ <b>مناطق مختلفة كل كومة</b> وزعيم 👹 كل 5 أكوام. اكشف الإبرة ثم المسها!</div></div><button class="bigBtn" data-close="helpOverlay">فهمت، خلني ألعب! 🎮</button></div></section></div>
+<div class="overlay" id="galleryOverlay" aria-hidden="true"><section class="panel vaultPanel"><div class="panelHead"><div><h2>🗝️ خزنة الإبر</h2><p>خزنة حقيقية فيها 1,000 موضع لإبر فريدة</p></div><button class="close" data-close="galleryOverlay" aria-label="إغلاق">×</button></div><div class="vaultBody" id="galleryBody"></div></section></div><div class="overlay" id="needleOverlay" aria-hidden="true"><section class="panel needlePanel"><div class="panelHead"><h2 id="needleDetailTitle">🪡 إبرة نادرة</h2><button class="close" data-close="needleOverlay" aria-label="إغلاق">×</button></div><div id="needleDetailBody" class="needleDetail"></div></section></div>
+<div class="overlay" id="winOverlay" aria-hidden="true"><section class="panel"><div class="victory"><div class="trophy" id="winIcon">🪡✨</div><h2 id="winTitle">لقيت الإبرة!</h2><p id="winMessage">مبروك! لقيت الإبرة بين القش.</p><div class="victoryReward" id="winReward">+150 🪙</div><button class="bigBtn vaultWinBtn" id="winVaultBtn">🗝️ ضع الإبرة في الخزنة</button><button class="bigBtn" id="nextBtn">🌾 افتح كومة جديدة</button></div></section></div>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
@@ -144,9 +177,9 @@ const rarities=[
 {id:'diamond',name:'الإبرة الماسية',icon:'💎',color:'#78dcf6',weight:3,bonus:4500},
 {id:'rainbow',name:'إبرة قوس قزح',icon:'🌈',color:'#e3a8ef',weight:1,bonus:16000}
 ];
-const defaultState=()=>({coins:0,bag:0,capacityLevel:0,powerLevel:0,valueLevel:0,luckLevel:0,helperLevel:0,helperOwned:{},owned:['hand'],equipped:'hand',level:1,remaining:180,total:180,needles:0,totalHay:0,sound:true,found:false,seed:1741,treasures:0,album:{},bossWins:0,bossHP:0,bossMax:0,milestones:[],drop:null,event:null,clicks:0});
-let state=defaultState();
-try{const saved=JSON.parse(localStorage.getItem(ST_KEY)||'null');if(saved&&typeof saved==='object')state={...state,...saved};}catch{}
+const defaultState=()=>({coins:0,bag:0,capacityLevel:0,powerLevel:0,valueLevel:0,luckLevel:0,helperLevel:0,helperOwned:{},owned:['hand'],equipped:'hand',level:1,remaining:180,total:180,needles:0,totalHay:0,sound:true,found:false,seed:1741,treasures:0,album:{},vaultOwned:[],lastNeedle:-1,bossWins:0,bossHP:0,bossMax:0,milestones:[],drop:null,event:null,clicks:0});
+let state=defaultState(),savedState=null;
+try{const saved=JSON.parse(localStorage.getItem(ST_KEY)||'null');if(saved&&typeof saved==='object'){savedState=saved;state={...state,...saved};}}catch{}
 // Defensive validation of saved data.
 if(!Array.isArray(state.owned))state.owned=['hand'];
 state.level=Math.max(1,Math.min(9999,Math.floor(Number(state.level)||1)));
@@ -158,6 +191,22 @@ state.luckLevel=Math.max(0,Math.min(12,Number(state.luckLevel)||0));
 state.helperOwned=(state.helperOwned&&typeof state.helperOwned==='object')?state.helperOwned:{};
 for(const helper of helpers)state.helperOwned[helper.id]=Math.max(0,Math.min(helper.max,Math.floor(Number(state.helperOwned[helper.id])||0)));
 state.album=(state.album&&typeof state.album==='object')?state.album:{};
+// Keep the same save key as v3. Upgrade older album rarity counts into unique vault slots once.
+const tierStarts=[0,400,650,810,920,980],tierCounts=[400,250,160,110,60,20];
+if(!savedState||!Array.isArray(savedState.vaultOwned)){
+  state.vaultOwned=[];
+  for(let k=0;k<rarities.length;k++){
+    const oldCount=Math.max(0,Math.floor(Number(state.album[rarities[k].id])||0));
+    for(let n=0;n<Math.min(oldCount,tierCounts[k]);n++)state.vaultOwned.push(tierStarts[k]+n);
+  }
+  // If legacy saves have totals but incomplete rarity records, retain all prior finds.
+  for(let i=0;i<Math.min(1000,Math.floor(Number(state.needles)||0));i++){
+    if(state.vaultOwned.length>=Math.min(1000,state.needles))break;
+    if(!state.vaultOwned.includes(i))state.vaultOwned.push(i);
+  }
+}
+state.vaultOwned=[...new Set(state.vaultOwned.map(Number).filter(x=>Number.isInteger(x)&&x>=0&&x<1000))].sort((a,b)=>a-b);
+state.lastNeedle=Number.isInteger(state.lastNeedle)?state.lastNeedle:-1;
 state.bossWins=Math.max(0,Math.floor(Number(state.bossWins)||0));
 state.bossMax=Math.max(0,Number(state.bossMax)||0);state.bossHP=Math.max(0,Math.min(state.bossMax,Number(state.bossHP)||0));
 if(!Array.isArray(state.milestones))state.milestones=[];
@@ -204,14 +253,14 @@ function power(){return (tools.find(t=>t.id===state.equipped).power+state.powerL
 function sellRate(){return (1+state.valueLevel*.5)*(activeEvent()?.id==='double'?2:1);}
 function totalFor(level){return Math.round(Math.min(1e10,180*Math.pow(1.42,level-1)));}
 function upgradeCost(kind){return Math.round(({capacity:40,power:90,value:120,helper:300,luck:175})[kind] *Math.pow(({capacity:2.4,power:2.55,value:2.55,helper:3.25,luck:2.4})[kind],state[kind+'Level']));}
-function updateHUD(){const t=tools.find(t=>t.id===state.equipped);const l=currentLocation();$('coins').textContent=compact(state.coins);$('coins').title=fmt(state.coins)+' عملة';$('bag').textContent=compact(state.bag)+' / '+compact(cap());$('bag').title=fmt(state.bag)+' / '+fmt(cap());$('needles').textContent=compact(state.needles);$('needles').title=fmt(state.needles)+' إبرة';$('stageName').textContent=l.icon+' '+l.name+' · كومة '+compact(state.level)+(isBoss()?' 👹':'');const pct=Math.round(100*safeProgress());const battlePct=state.bossHP>0?Math.round(100*(1-state.bossHP/Math.max(1,state.bossMax))):null;$('progress').style.width=(battlePct??pct)+'%';$('percent').textContent=(battlePct===null?pct:battlePct)+'%';$('remaining').textContent=state.bossHP>0?'حارس القش!':state.remaining>0?'باقي '+compact(state.remaining)+' قشة':'ظهرت الإبرة!';$('toolDisplay').textContent=t.emoji+' '+t.name+' · +'+compact(power())+' قش/نقرة';$('sellText').textContent=state.bag>0?'تحصل '+compact(Math.floor(state.bag*sellRate()))+' 🪙':'السلة فارغة';$('sellBtn').disabled=state.bag<=0;$('soundBtn').textContent=state.sound?'🔊':'🔇';$('hint').innerHTML=state.bossHP>0?'👑 <em>حارس القش!</em> اضرب القلب المتوهّج':state.remaining<=0?'✨ <em>ظهرت الإبرة!</em> المسها الآن':state.bag>=cap()?'🧺 <em>السلة ممتلئة!</em> بِع القش':'👆 <em>انقر على كومة القش</em> واكتشف أسرارها!';
+function updateHUD(){const t=tools.find(t=>t.id===state.equipped);const l=currentLocation();$('coins').textContent=compact(state.coins);$('coins').title=fmt(state.coins)+' عملة';$('bag').textContent=compact(state.bag);$('bagLimit').textContent='السعة: '+compact(cap());$('bag').title=fmt(state.bag)+' قشة من '+fmt(cap());$('bagLimit').title='الحد الأقصى: '+fmt(cap());$('bagFill').style.width=Math.min(100,100*state.bag/Math.max(1,cap()))+'%';$('needles').textContent=compact(state.vaultOwned.length)+' / 1K';$('needles').title=fmt(state.vaultOwned.length)+' من أصل 1000 إبرة فريدة';$('stageName').textContent=l.icon+' '+l.name+' · كومة '+compact(state.level)+(isBoss()?' 👹':'');const pct=Math.round(100*safeProgress());const battlePct=state.bossHP>0?Math.round(100*(1-state.bossHP/Math.max(1,state.bossMax))):null;$('progress').style.width=(battlePct??pct)+'%';$('percent').textContent=(battlePct===null?pct:battlePct)+'%';$('remaining').textContent=state.bossHP>0?'حارس القش!':state.remaining>0?'باقي '+compact(state.remaining)+' قشة':'ظهرت الإبرة!';$('toolDisplay').textContent=t.emoji+' '+t.name+' · +'+compact(power())+' قش/نقرة';$('sellText').textContent=state.bag>0?'تحصل '+compact(Math.floor(state.bag*sellRate()))+' 🪙':'السلة فارغة';$('sellBtn').disabled=state.bag<=0;$('soundBtn').textContent=state.sound?'🔊':'🔇';$('hint').innerHTML=state.bossHP>0?'👑 <em>حارس القش!</em> اضرب القلب المتوهّج':state.remaining<=0?'✨ <em>ظهرت الإبرة!</em> المسها الآن':state.bag>=cap()?'🧺 <em>السلة ممتلئة!</em> بِع القش':'👆 <em>انقر على كومة القش</em> واكتشف أسرارها!';
 const crew=helpers.filter(h=>state.helperOwned[h.id]>0).map(h=>h.emoji+'×'+state.helperOwned[h.id]);$('crewText').textContent=crew.length?'🧑‍🌾 '+crew.join(' ')+' · '+compact(helperRate())+'/ث':'🐣 اشترِ مساعداً من المتجر';$('luckText').textContent='🎁 كنوز '+compact(state.treasures)+' · 👹 زعماء '+compact(state.bossWins);
 $('bossHUD').classList.toggle('on',state.bossHP>0);$('bossHp').textContent=compact(Math.ceil(state.bossHP))+' / '+compact(state.bossMax);$('bossHp').title=fmt(Math.ceil(state.bossHP))+' / '+fmt(state.bossMax);$('bossFill').style.width=(state.bossMax?Math.max(0,100*state.bossHP/state.bossMax):0)+'%';
 if(activeEvent()){$('eventBanner').textContent=(state.event.id==='frenzy'?'🔥 حُمّى القش ×5':state.event.id==='double'?'💰 بيع مضاعف':'🧲 قوة مضاعفة')+' · '+Math.ceil((state.event.until-Date.now())/1000)+' ث';$('eventBanner').classList.add('on');}else{$('eventBanner').classList.remove('on');}
 }
 function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(noticeTimeout);noticeTimeout=setTimeout(()=>el.classList.remove('show'),1550);}
 function show(id){$(id).classList.add('show');$(id).setAttribute('aria-hidden','false');}
-function hide(id){$(id).classList.remove('show');$(id).setAttribute('aria-hidden','true');}
+function hide(id){$(id).classList.remove('show');$(id).setAttribute('aria-hidden','true');if(id==='galleryOverlay'&&vaultFromWin){vaultFromWin=false;show('winOverlay');}}
 function purchase(kind,id){
 if(kind==='tool'){const t=tools.find(x=>x.id===id);if(!t)return;if(state.owned.includes(id)){state.equipped=id;toast('جهزت '+t.name+' '+t.emoji);beep(580);}else if(state.coins>=t.price){state.coins-=t.price;state.owned.push(id);state.equipped=id;toast('مبروك! اشتريت '+t.name);beep(820,.16,'triangle');}else{toast('ما عندك عملات كفاية 🪙');return;}}
 else if(kind==='helper'){const h=helpers.find(x=>x.id===id);if(!h)return;const lvl=state.helperOwned[id],cost=Math.round(h.price*Math.pow(2.55,lvl));if(lvl>=h.max||state.coins<cost)return;state.coins-=cost;state.helperOwned[id]++;toast('انضم إليك '+h.name+'! '+h.emoji);beep(850,.16,'triangle');}
@@ -236,14 +285,109 @@ else{for(let i=0;i<Math.min(5,gained);i++)particles.push(makeParticle(pile.x+pil
 if(state.remaining===0){state.drop=null;state.event=null;if(isBoss()){state.bossMax=Math.ceil(25+state.level*12+state.total*.14);state.bossHP=state.bossMax;toast('👹 ظهر زعيم القش! انقر عليه!');beep(210,.35,'sawtooth');}else{toast('✨ ظهرت الإبرة! المسها لتلتقطها');beep(1050,.2,'sine');}}
 else milestones();save();updateHUD();return gained;}
 function hitBoss(x,y){if(state.bossHP<=0)return;const damage=Math.max(4,Math.ceil(power()*2));bossHitUntil=performance.now()+210;state.bossHP=Math.max(0,state.bossHP-damage);for(let i=0;i<18;i++)particles.push(makeParticle(x,y,'straw'));floatText(x,y,'⚔️ '+fmt(damage),true);wobble=1.7;beep(220+Math.random()*70,.09,'square',.028);if(state.bossHP===0){const prize=Math.round(state.level*120+state.bossMax*3);state.coins+=prize;state.bossWins++;toast('🏆 هزمت زعيم القش! +'+fmt(prize)+' 🪙');for(let i=0;i<80;i++)particles.push(makeParticle(pile.x,pile.base-pile.h*.3,'confetti'));beep(880,.25,'triangle');}save();updateHUD();}
-function win(){if(roundWin||state.remaining>0||state.bossHP>0)return;roundWin=true;const rarity=chooseRarity();const prize=Math.floor(130*Math.pow(state.level,1.35))+rarity.bonus;state.coins+=prize;state.needles++;state.album[rarity.id]=(state.album[rarity.id]||0)+1;state.found=true;state.drop=null;state.event=null;for(let i=0;i<95;i++)particles.push(makeParticle(pile.x+(Math.random()-.5)*pile.rx*.6,pile.base-pile.h*.55,'confetti'));
-$('winIcon').textContent=rarity.icon+'✨';$('winTitle').textContent='حصلت على '+rarity.name+'!';$('winMessage').textContent='أكملت كومة '+fmt(state.level)+' في '+currentLocation().name+'! '+(isBoss()?'وهزمت زعيم القش أيضاً! ':'')+'أضفنا الإبرة إلى ألبومك.';$('winReward').textContent='🎁 مكافأة +'+fmt(prize)+' 🪙';save();updateHUD();beep(800,.15,'triangle');setTimeout(()=>beep(1030,.19,'triangle'),145);setTimeout(()=>show('winOverlay'),380);}
+function win(){if(roundWin||state.remaining>0||state.bossHP>0)return;roundWin=true;const rarity=chooseRarity();const prize=Math.floor(130*Math.pow(state.level,1.35))+rarity.bonus;state.coins+=prize;state.needles++;state.album[rarity.id]=(state.album[rarity.id]||0)+1;const prizeNeedle=awardNeedle(rarity);state.found=true;state.drop=null;state.event=null;for(let i=0;i<95;i++)particles.push(makeParticle(pile.x+(Math.random()-.5)*pile.rx*.6,pile.base-pile.h*.55,'confetti'));
+$('winIcon').innerHTML=prizeNeedle===null?rarity.icon:needleArt(prizeNeedle,true);$('winTitle').textContent=prizeNeedle===null?'أكملت مجموعة الألف إبرة!':'حصلت على '+needleName(prizeNeedle)+'!';$('winMessage').textContent='أكملت كومة '+fmt(state.level)+' في '+currentLocation().name+'! '+(isBoss()?'وهزمت زعيم القش أيضاً! ':'')+(prizeNeedle===null?'الخزنة مكتملة، وخذت مكافأتك.':'الإبرة رقم '+String(prizeNeedle+1).padStart(4,'0')+' محفوظة في خزنتك.');$('winReward').textContent='🎁 مكافأة +'+fmt(prize)+' 🪙';save();updateHUD();beep(800,.15,'triangle');setTimeout(()=>beep(1030,.19,'triangle'),145);setTimeout(()=>show('winOverlay'),380);}
 function nextRound(){state.level++;state.total=totalFor(state.level);state.remaining=state.total;state.found=false;state.drop=null;state.event=null;state.bossHP=0;state.bossMax=0;state.milestones=[];roundWin=false;state.seed=state.level*9187+1741;save();updateHUD();hide('winOverlay');makeTextures();particles.length=0;toast(currentLocation().icon+' دخلت '+currentLocation().name+'!');}
-function gallery(){const total=state.needles;let out='<div class="trophy">📒🪡</div><h2 style="margin:8px">ألبوم الإبر النادرة</h2><p class="tagline">جمعت '+fmt(total)+' إبرة • '+fmt(state.treasures)+' كنز • هزمت '+fmt(state.bossWins)+' زعماء</p><div class="albumGrid">';
-for(const r of rarities){const n=state.album[r.id]||0;out+='<div class="albumCell '+(n?'':'locked')+'"><span class="em">'+(n?r.icon:'🔒')+'</span><strong>'+(n?r.name:'إبرة مجهولة')+'</strong><small>'+(n?'اكتشفت '+fmt(n):'لم تُكتشف بعد')+'</small></div>';}
-out+='</div><h3 style="text-align:right;margin:8px 0">🗺️ المناطق والمغامرات</h3><div class="regionGrid">';for(let i=0;i<locations.length;i++){const l=locations[i],opened=state.level>=i+1;out+='<div class="regionCell '+(opened?'':'locked')+'">'+l.icon+' '+(opened?l.name:'منطقة مقفلة')+'<small style="display:block;color:#998464">'+(opened?l.hint:'تفتح عند الكومة '+(i+1))+'</small></div>';}
-out+='</div><div class="helpGrid"><div class="helpTip">🧺 جمعت '+fmt(state.totalHay)+' قشة</div><div class="helpTip">👑 تنتظرك معركة زعيم كل 5 أكوام</div></div><button class="bigBtn" id="galleryOk">أكمل المغامرة 🌾</button>';
-$('galleryBody').innerHTML=out;$('galleryOk').onclick=()=>hide('galleryOverlay');show('galleryOverlay');}
+const NEEDLE_TOTAL=1000,VAULT_PAGE=40;
+let vaultPage=0,vaultMode='all',vaultJump='',vaultFromWin=false;
+const N_HEAD=['تاج','هلال','نجمة','قلب','شمس','لهب','زهرة','جناح','بلورة','مرساة'];
+const N_SHAFT=['المضيئة','الملكية','العتيقة','البرّاقة','الفضية','الموشّاة','الشائكة','الرقيقة','الملتوية','المزدوجة'];
+const N_TAIL=['الزمرد','الياقوت','العنبر','الثلج','الفجر','الغروب','الليل','الصنوبر','الذهب','القمر'];
+function tierFor(id){return id<400?0:id<650?1:id<810?2:id<920?3:id<980?4:5;}
+function needleName(id){return 'إبرة '+N_HEAD[id%10]+' '+N_SHAFT[Math.floor(id/10)%10]+' '+N_TAIL[Math.floor(id/100)%10];}
+function needleArt(id,big=false){
+  // Exactly 10 crown silhouettes × 10 unique shaft configurations × 10 finials = 1,000 distinguishable needles.
+  const head=id%10,shaft=Math.floor(id/10)%10,finial=Math.floor(id/100)%10;
+  const tier=tierFor(id),hues=[190,25,215,41,181,290];
+  const h=(hues[tier]+(finial-4)*5+360)%360;
+  const metal='hsl('+h+', '+(tier>=3?85:50)+'%, '+(tier>=3?67:71)+'%)';
+  const dark='hsl('+h+', 52%, 32%)',bright='hsl('+h+', 96%, 91%)';
+  const inlay=['#c94954','#57b999','#5897d7','#f8c460','#9f80d9','#ef9bc4','#80dbe1','#fd9253','#5a9c62','#e8dc9d'][finial];
+  const crowns=[
+    '<path d="M31 28 L31 10 L40 16 L49 10 L49 28Z"/>',
+    '<path d="M28 22 Q40 1 51 22 Q42 18 34 26Z"/>',
+    '<path d="M40 4 L45 15 L57 16 L48 24 L49 35 L40 29 L31 35 L32 24 L23 16 L35 15Z"/>',
+    '<path d="M40 27 C11 15 25 1 40 13 C55 1 69 15 40 27Z"/>',
+    '<circle cx="40" cy="19" r="10"/><path d="M40 3V0M40 38V34M23 19H18M62 19H57M29 8L25 4M51 8L55 4" stroke-width="4"/>',
+    '<path d="M40 3 Q56 18 41 35 Q18 20 40 3Z"/>',
+    '<path d="M40 8Q47 1 51 13Q60 15 52 23Q54 34 42 32Q32 38 28 26Q18 18 29 13Q32 4 40 8Z"/>',
+    '<path d="M40 28 Q13 25 20 9 L36 18 L40 5 L44 18 L60 9 Q67 25 40 28Z"/>',
+    '<path d="M40 1 L55 20 L40 35 L25 20Z"/>',
+    '<path d="M24 11V26L40 35L56 26V11M24 11L40 3L56 11" fill="none" stroke-width="6"/>'
+  ];
+  const ornaments=[
+    '<path d="M34 46H46"/>',
+    '<path d="M31 49L49 63M49 49L31 63"/>',
+    '<path d="M32 48L48 56L32 64" fill="none"/>',
+    '<circle cx="40" cy="55" r="8"/>',
+    '<path d="M28 49H52M30 58H50M33 67H47"/>',
+    '<path d="M38 47L47 53L35 59L44 65" fill="none"/>',
+    '<path d="M30 53L40 45L50 53L40 64Z"/>',
+    '<path d="M27 57Q40 41 53 57Q40 72 27 57Z" fill="none"/>',
+    '<path d="M29 49L51 65M51 49L29 65M40 44V70"/>',
+    '<path d="M27 51L40 58L53 51M27 64L40 58L53 64" fill="none"/>'
+  ];
+  const tails=[
+    '<circle cx="40" cy="77" r="5"/>',
+    '<path d="M29 80L40 67L51 80L40 92Z"/>',
+    '<path d="M27 74L40 79L53 74" fill="none"/>',
+    '<path d="M30 73L30 84M50 73L50 84"/>',
+    '<path d="M40 73L25 82L40 90L55 82Z"/>',
+    '<path d="M26 77Q40 67 54 77Q40 90 26 77Z"/>',
+    '<path d="M26 81L35 71L45 88L54 74" fill="none"/>',
+    '<path d="M31 75L31 88M40 71L40 91M49 75L49 88"/>',
+    '<path d="M26 78H54M30 84H50"/>',
+    '<path d="M31 73Q40 91 49 73Q45 92 40 95Q35 92 31 73Z"/>'
+  ];
+  return '<svg class="needleArt" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" aria-label="'+needleName(id)+'">'
+    +'<path d="M21 32Q18 23 28 22L40 15L52 22Q62 24 59 32L50 92L40 116L30 92Z" fill="'+dark+'" opacity=".1"/>'
+    +'<path d="M35 31Q40 26 45 31L44 94L40 115L36 94Z" fill="'+metal+'" stroke="'+dark+'" stroke-width="2"/>'
+    +'<path d="M38 37L39 97" stroke="'+bright+'" stroke-width="1.8" stroke-linecap="round"/>'
+    +'<ellipse cx="40" cy="35" rx="5" ry="8" fill="#293e42" stroke="'+bright+'" stroke-width="2"/>'
+    +'<g fill="'+metal+'" stroke="'+dark+'" stroke-width="2.4" stroke-linejoin="round">'+crowns[head]+'</g>'
+    +'<g fill="'+inlay+'" stroke="'+dark+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">'+ornaments[shaft]+'</g>'
+    +'<g fill="'+bright+'" stroke="'+dark+'" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">'+tails[finial]+'</g>'
+    +'<circle cx="40" cy="20" r="3.7" fill="'+inlay+'" stroke="'+bright+'" stroke-width="1"/>'
+    +'</svg>';
+}
+function awardNeedle(rarity){
+ const tier=rarities.findIndex(r=>r.id===rarity.id);
+ const selected=new Set(state.vaultOwned);
+ let pool=[];
+ for(let id=tierStarts[tier];id<tierStarts[tier]+tierCounts[tier];id++)if(!selected.has(id))pool.push(id);
+ if(pool.length===0)for(let id=0;id<1000;id++)if(!selected.has(id))pool.push(id);
+ if(pool.length===0){state.lastNeedle=-1;return null;}
+ // Iterate through all IDs over time, with a unique design for each discovered slot.
+ const roll=(state.seed*7919+state.level*104729+state.clicks*31)>>>0;
+ const id=pool[roll%pool.length];state.vaultOwned.push(id);state.vaultOwned.sort((a,b)=>a-b);state.lastNeedle=id;return id;
+}
+function gallery(){vaultMode='all';vaultJump='';vaultPage=state.lastNeedle>=0?Math.floor(state.lastNeedle/VAULT_PAGE):0;renderVault();show('galleryOverlay');}
+function renderVault(){
+ const owned=new Set(state.vaultOwned);let ids=[];
+ for(let i=0;i<NEEDLE_TOTAL;i++)if((vaultMode==='all'||(vaultMode==='owned'&&owned.has(i))||(vaultMode.startsWith('t')&&tierFor(i)===Number(vaultMode.slice(1))))&&(!vaultJump||String(i+1).includes(vaultJump)))ids.push(i);
+ const pages=Math.max(1,Math.ceil(ids.length/VAULT_PAGE));vaultPage=Math.min(pages-1,Math.max(0,vaultPage));
+ let out='<div class="vaultShowcase"><div class="vaultDoor" aria-label="باب خزنة معدنية بزخارف ومقبض دائري"><div class="vaultWheel"><span></span></div></div><div class="vaultSign"><strong>خزنة الألف إبرة</strong><p>كل إبرة مختلفة بالشكل والزخرفة • عند العثور عليها تنحفظ تلقائياً</p><span class="vaultCount">'+fmt(owned.size)+' / 1,000</span></div></div>';
+ out+='<div class="vaultControls"><select id="vaultFilter" aria-label="تصفية الإبر"><option value="all">كل الإبر (1,000)</option><option value="owned">الإبر المكتشفة ('+owned.size+')</option>';
+ for(let t=0;t<rarities.length;t++)out+='<option value="t'+t+'">'+rarities[t].name+' ('+tierCounts[t]+')</option>';
+ out+='</select><input id="vaultSearch" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="رقم الإبرة" value="'+vaultJump+'" aria-label="ابحث عن رقم الإبرة"></div>';
+ out+='<div class="vaultShelf"><div class="vaultGrid">';
+ for(const id of ids.slice(vaultPage*VAULT_PAGE,(vaultPage+1)*VAULT_PAGE)){
+   const yes=owned.has(id),tier=rarities[tierFor(id)];
+   out+='<button class="vaultSlot '+(yes?'owned':'locked')+'" data-needle="'+id+'" aria-label="الخانة '+(id+1)+(yes?' '+needleName(id):' مقفلة')+'">'+needleArt(id)+'<span class="slotId">#'+String(id+1).padStart(4,'0')+'</span><span class="slotStatus">'+(yes?tier.name.replace('الإبرة ',''):'🔒 مقفلة')+'</span></button>';
+ }
+ if(!ids.length)out+='<p style="color:white;grid-column:1/-1">ما فيه إبر مطابقة، غيّر البحث.</p>';
+ out+='</div></div><div class="vaultPages"><button id="vaultPrev" '+(vaultPage===0?'disabled':'')+'>السابق</button><span>صفحة '+(vaultPage+1)+' من '+pages+'</span><button id="vaultNext" '+(vaultPage>=pages-1?'disabled':'')+'>التالي</button></div>';
+ out+='<div class="vaultRegion"><h3>🗺️ المناطق المفتوحة</h3><div class="regionGrid">';for(let i=0;i<locations.length;i++){const l=locations[i],opened=state.level>=i+1;out+='<div class="regionCell '+(opened?'':'locked')+'">'+l.icon+' '+(opened?l.name:'منطقة مقفلة')+'<small style="display:block;color:#998464">'+(opened?l.hint:'تفتح عند الكومة '+(i+1))+'</small></div>';}
+ out+='</div><p class="tagline">🎁 كنوز: '+fmt(state.treasures)+' • 👹 زعماء: '+fmt(state.bossWins)+' • 🧺 قش مجمّع: '+compact(state.totalHay)+'</p></div>';
+ $('galleryBody').innerHTML=out;
+ $('vaultFilter').value=vaultMode;$('vaultFilter').onchange=e=>{vaultMode=e.target.value;vaultPage=0;renderVault();};
+ $('vaultSearch').oninput=e=>{vaultJump=e.target.value.replace(/[^0-9]/g,'').slice(0,4);vaultPage=0;renderVault();const inp=$('vaultSearch');inp.focus();inp.setSelectionRange(vaultJump.length,vaultJump.length);};
+ $('vaultPrev').onclick=()=>{vaultPage--;renderVault();$('galleryBody').scrollTop=140;};
+ $('vaultNext').onclick=()=>{vaultPage++;renderVault();$('galleryBody').scrollTop=140;};
+ $('galleryBody').querySelector('.vaultGrid').onclick=e=>{const b=e.target.closest('[data-needle]');if(b)viewNeedle(Number(b.dataset.needle));};
+}
+function viewNeedle(id){const found=state.vaultOwned.includes(id),rarity=rarities[tierFor(id)];$('needleDetailTitle').textContent='🗝️ إبرة #'+String(id+1).padStart(4,'0');$('needleDetailBody').innerHTML='<div class="needleBadge">'+rarity.name+'</div>'+needleArt(id,true)+'<strong>'+(found?needleName(id):'إبرة مخفية')+'</strong><p>'+(found?'✅ مكتشفة ومحفوظة في الخزنة. لها رأس وجسم وزخرفة مميزة لا تتكرر في أي من الإبر الألف.':'🔒 هذه الخانة ما انفتحت بعد. ابحث عن المزيد من الإبر داخل أكوام القش!')+'</p>';
+ show('needleOverlay');}
 function floatText(x,y,str,treasure=false){const el=document.createElement('div');el.className='float'+(treasure?' treasure':'');el.textContent=str;el.style.left=x+'px';el.style.top=y+'px';$('floatLayer').append(el);setTimeout(()=>el.remove(),850);}
 const randSeed=(seed)=>()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
 let texture=[],edges=[],flowers=[];
@@ -440,7 +584,7 @@ const inside=dx<rx*1.13+15 && dy>=-27 && dy<h*1.19+21 && (dy<h*.25||dx<rx*(1-.43
 if(inside){collect(power(),x,y);}else if(y<base&&y>height*.19){toast('👆 اضغط على كومة القش الذهبية');}}
 canvas.addEventListener('pointerdown',e=>{e.preventDefault();const r=canvas.getBoundingClientRect();onTap(e.clientX-r.left,e.clientY-r.top);});
 canvas.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(state.bossHP>0)hitBoss(pile.x,pile.base-height*.2);else if(state.remaining<=0)win();else collect(power(),pile.x,pile.base-pile.h*.46);}});
-$('sellBtn').onclick=sell;$('shopBtn').onclick=showShop;$('galleryBtn').onclick=gallery;$('helpBtn').onclick=()=>show('helpOverlay');$('soundBtn').onclick=()=>{state.sound=!state.sound;updateHUD();save();if(state.sound)beep(720);};$('nextBtn').onclick=nextRound;
+$('sellBtn').onclick=sell;$('shopBtn').onclick=showShop;$('galleryBtn').onclick=gallery;$('helpBtn').onclick=()=>show('helpOverlay');$('soundBtn').onclick=()=>{state.sound=!state.sound;updateHUD();save();if(state.sound)beep(720);};$('nextBtn').onclick=nextRound;$('winVaultBtn').onclick=()=>{vaultFromWin=true;hide('winOverlay');gallery();};
 for(const el of document.querySelectorAll('[data-close]'))el.onclick=()=>hide(el.dataset.close);
 for(const el of document.querySelectorAll('.overlay'))el.addEventListener('pointerdown',e=>{if(e.target===el&&el.id!=='winOverlay')hide(el.id)});
 $('shopTabs').addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(!t)return;shopTab=t.dataset.tab;for(const b of $('shopTabs').querySelectorAll('[data-tab]'))b.classList.toggle('selected',b===t);renderShop();});
